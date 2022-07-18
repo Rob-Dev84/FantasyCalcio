@@ -15,6 +15,26 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    <x-nav-link :href="route('market')" :active="request()->routeIs('market')">
+                        {{ __('Market') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('roster')" :active="request()->routeIs('roster')">
+                        {{ __('Roster') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('lineup')" :active="request()->routeIs('lineup')">
+                        {{ __('Line up') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('matches')" :active="request()->routeIs('matches')">
+                        {{ __('Matches') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('standings')" :active="request()->routeIs('standings')">
+                        {{ __('Standings') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -65,6 +85,26 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+            
+            <x-responsive-nav-link :href="route('market')" :active="request()->routeIs('market')">
+                {{ __('Market') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('roster')" :active="request()->routeIs('roster')">
+                {{ __('Roster') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('lineup')" :active="request()->routeIs('lineup')">
+                {{ __('Lineup') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('matches')" :active="request()->routeIs('matches')">
+                {{ __('Matches') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('standings')" :active="request()->routeIs('standings')">
+                {{ __('Standings') }}
             </x-responsive-nav-link>
         </div>
 
