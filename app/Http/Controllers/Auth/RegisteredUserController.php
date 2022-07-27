@@ -33,7 +33,9 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->role_id);
         $request->validate([
+            'role_id' => ['integer', 'between:2,2'],
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255'],
@@ -42,6 +44,7 @@ class RegisteredUserController extends Controller
         ]);
 
         $user = User::create([
+            'role_id' => $request->role_id=2,
             'name' => $request->name,
             'surname' => $request->surname,
             'username' => $request->username,

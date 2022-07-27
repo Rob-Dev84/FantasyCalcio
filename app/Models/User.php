@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+// use App\Models\User;
+// use App\Models\League;
+// use App\Models\UserSetting;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -18,6 +21,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $fillable = [
+        'role_id',
         'name',
         'surname',
         'username',
@@ -43,4 +47,23 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    public function leagues()
+    {
+        return $this->hasMany(League::class);
+    }
+
+
+    //relationship to retrieve the user setting (for now the seleceted league)
+    public function userSetting()
+    {
+        return $this->hasOne(UserSetting::class);
+    }
+
+    // public function UserSetting()
+    // {
+    //     return $this->hasOne(UserSetting::class, User::class);
+    // }
+    
+    
 }

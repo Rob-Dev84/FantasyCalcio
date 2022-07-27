@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LeagueController;
+use App\Http\Controllers\LeagueSelectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,12 +50,19 @@ Route::get('/league', function () {//This will go to the controller
 
 
 //This is new Laravel 9 feature: I used [LeagueController::class] only once, when we groups ruotes
-// Route::controller(LeagueController::class)->group(function () {
-//     Route::get('/leagues', 'index')->name('leagues');
-//     Route::get('/leagues{league}', 'show')->name('leagues.show');
-//     Route::post('/leagues', 'store');
-//     Route::delete('/leagues{leagues}', 'destroy')->name('leagues.destroy');
-// });
+Route::controller(LeagueController::class)->middleware(['auth', 'verified'])->group(function () {
+
+    Route::get('/leagues', 'index')->name('leagues');
+    // Route::get('/leagues{league}', 'show')->name('leagues.show');
+    Route::post('/league', 'store');
+    
+    Route::delete('/leagues/{league}/softDelete', 'softDelete')->name('leagues.softDelete');
+    Route::post('/leagues/{league}/restore', 'restore')->name('leagues.restore');
+    Route::delete('/leagues/{league}/forceDelete', 'forceDelete')->name('leagues.forceDelete');//We're using the {id}, but the root model binding {league}
+});
+
+Route::put('/leagues/{league}/select', [LeagueSelectController::class, 'update'])->middleware(['auth', 'verified'])->name('leagues.select');
+
 
 Route::get('/invitations', function () {
     return view('invitations/invitations');

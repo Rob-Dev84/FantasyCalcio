@@ -25,11 +25,14 @@
         
                             <x-slot name="content">
                                 <!-- Leagues -->
-                                    <x-dropdown-link :href="route('market')"  :active="request()->routeIs('market')">
+                                    <x-dropdown-link :href="route('market')" :active="request()->routeIs('market')">
                                         {{ __('Leagues not found') }}
                                     </x-dropdown-link>
                                     <hr>
-                                    <x-dropdown-link :href="route('roster')"  :active="request()->routeIs('roster')">
+                                    <x-dropdown-link :href="route('leagues')" :active="request()->routeIs('leagues')">
+                                        {{ __('Leagues management') }}
+                                    </x-dropdown-link>
+                                    <x-dropdown-link :href="route('leagues')" :active="request()->routeIs('leagues')">
                                         {{ __('Create new league') }}
                                     </x-dropdown-link>
                             </x-slot>
