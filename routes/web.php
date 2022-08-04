@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TeamController;
 use App\Http\Controllers\LeagueController;
 use App\Http\Controllers\LeagueSelectController;
 
@@ -63,6 +64,16 @@ Route::controller(LeagueController::class)->middleware(['auth', 'verified'])->gr
 
 Route::put('/leagues/{league}/select', [LeagueSelectController::class, 'update'])->middleware(['auth', 'verified'])->name('leagues.select');
 
+Route::controller(TeamController::class)->middleware(['auth', 'verified'])->group(function () {
+    Route::get('/team', 'index')->name('team');
+
+    Route::get('/team/create', 'create')->name('team.create');//form to create a team
+    Route::post('/team', 'store');
+
+    Route::get('/team/{team}', 'edit')->name('team.edit');//form to modify team
+    Route::put('/team/{team}', 'update')->name('team.update');
+    Route::delete('/team/{team}', 'destroy')->name('team.destroy');
+});
 
 Route::get('/invitations', function () {
     return view('invitations/invitations');

@@ -14,5 +14,14 @@ class UserSetting extends Model
         'league_id',
      ];
 
+    public function league()
+    {
+    return $this->belongsTo(League::class);
+    }
+
+    public function team()
+    {
+    return $this->hasOneThrough(Team::class, League::class);
+    }
 
 }

@@ -67,7 +67,7 @@ class LeagueController extends Controller
     public function store(Request $request, League $league)
     {
         $this->validate($request, [
-            'name' => 'required|unique:leagues|max:25',
+            'name' => 'required|unique:leagues|min:3|max:25',
             'league_type' => 'required|integer|between:1,1',
             'market_type' => 'required|integer|between:1,1',
             'score_type' => 'required|integer|between:1,1',

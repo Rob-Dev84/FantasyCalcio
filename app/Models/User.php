@@ -60,10 +60,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(UserSetting::class);
     }
 
-    // public function UserSetting()
-    // {
-    //     return $this->hasOne(UserSetting::class, User::class);
-    // }
+    //Get the team Through the userSetting model
+    public function team()
+    {
+        return $this->hasOneThrough(Team::class, UserSetting::class, 'league_id', 'league_id');
+    }
     
     
 }

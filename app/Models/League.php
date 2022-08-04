@@ -41,12 +41,23 @@ class League extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function selectedBy(User $user)
+    {
+        return $this->userSetting->contains('user_id', $user->id);
+    }
+
     //relationship to retrieve the user setting (for now the seleceted league)
     public function userSetting()
     {
         return $this->hasOne(UserSetting::class);
     }
 
+    public function teams()
+    {
+        return $this->hasMany(Team::class);
+    }
+
+    
 
 
 
