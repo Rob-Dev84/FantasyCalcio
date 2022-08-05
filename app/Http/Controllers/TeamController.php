@@ -50,8 +50,9 @@ class TeamController extends Controller
     {
         // dd($request->team()->user_id);
         $this->validate($request, [
-            'name' => 'required|unique:teams|min:3|max:25',
-            // . $this->league()->id,//team name unique per league
+            'name' => ['required', //Unique team name per league 
+                        Rule::unique('teams')->where('user_id', Auth::user()->id, 'league_id', Auth::user()->userSetting->league_id),    
+                        'min:3|max:25'],
             'stadium' => 'required|min:3|max:25'
         ]);
 
@@ -97,11 +98,15 @@ class TeamController extends Controller
      */
     public function edit(Team $team)
     {
+        if (Auth::user()->id === $team->user_id) {
+            return view('team.edit', [
+                'team' => $team
+            ]);
+        } else {
+            return back();
+        }
         
-        return view('team.edit', [
-            'team' => $team
-        ]);
-
+        
     }
 
     /**
@@ -113,9 +118,11 @@ class TeamController extends Controller
      */
     public function update(Request $request, Team $team)
     {
-        // dd(Auth::user()->userSetting->league_id);
+        $this->authorize('update', $team);
+
+        // Note: Better to use ignore($team), then the $team->id, to prevent SQL injection
         $this->validate($request, [
-            'name' => ['required', //Unique team name per league, but Ignore same name per user_id session
+            'name' => ['required', //Ignore unique teame when user update name and Keep Unique team name per league 
                         Rule::unique('teams')->ignore($team)
                                              ->where('user_id', Auth::user()->id, 'league_id', Auth::user()->userSetting->league_id),    
                         'min:3|max:25'],
@@ -138,6 +145,7 @@ class TeamController extends Controller
      */
     public function destroy(Team $team)
     {
+        $this->authorize('delete', $team);//delete is the method name we defined in TeamPolicy file. And we want to pass the $team object as well
         $team->delete();
 
         return redirect('team');
