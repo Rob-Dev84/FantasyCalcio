@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\League;
+use App\Models\Invitation;
 use App\Models\UserSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,12 +38,32 @@ class LeagueController extends Controller
         //Get user league_id selected
         $leagueSelected = UserSetting::where('user_id', Auth::user()->id)->first();
 
+        $receivedInvitations = NULL;
+        $leagues_guest = NULL;
+
+        //Get all user Invitation received (use relationship un user model, to get the invitation table and the league name)
+        $receivedInvitations = Invitation::get()->where('email', Auth::user()->email);
+
+        if ($receivedInvitations) {
+            //Get league name (better a join between invitation/league table)
+            foreach ($receivedInvitations as $receivedInvitation) {
+
+                $leagues_guest = League::find($receivedInvitation->league_id);
+
+            }
+        }
+
+        
+        
+
         
         //Here we put the league into an array. You need to iterate in you view file (leagues/index.blade.php)
         return view('leagues.index', [
             'leagues' => $leagues,
             'leagues_deleted' => $leagues_deleted,
             'leagueSelected' => $leagueSelected,
+            'receivedInvitations' => $receivedInvitations,
+            'leagues_guest' => $leagues_guest,
         ]);
 
  

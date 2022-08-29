@@ -148,10 +148,15 @@ return [
     |
     */
 
+    
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'attribute-name' => [/* Laravel Example */
+            'rule-name' => 'custom-message',/* Laravel Example */
         ],
+        'email' => [
+            'auto_email' => 'The :attribute must be a different email address than yours.',
+            'exists_email' => 'The user with this :attribute has already beeen invited.',
+        ]
     ],
 
     /*

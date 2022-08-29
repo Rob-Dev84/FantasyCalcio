@@ -46,16 +46,27 @@ class League extends Model
         return $this->userSetting->contains('user_id', $user->id);
     }
 
+    // public function leagueOwnedBy(User $user)
+    // {
+    //     return $this->user->contains('user_id', $user->id); 
+    // }
+
     //relationship to retrieve the user setting (for now the seleceted league)
     public function userSetting()
     {
         return $this->hasOne(UserSetting::class);
     }
 
+    public function invitations()
+    {
+        return $this->hasManyThrough(Invitation::class, UserSetting::class, 'league_id', 'league_id'); 
+    }
+
     public function teams()
     {
         return $this->hasMany(Team::class);
     }
+
 
     
 

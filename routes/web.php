@@ -3,7 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\LeagueController;
+use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\LeagueSelectController;
+use App\Http\Controllers\Invitation\TrashController;
+use App\Http\Controllers\InvitationReceivedController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,12 +78,31 @@ Route::controller(TeamController::class)->middleware(['auth', 'verified'])->grou
     Route::delete('/team/{team}', 'destroy')->name('team.destroy');
 });
 
-Route::get('/invitations', function () {
-    return view('invitations/invitations');
-})->middleware(['auth', 'verified'])->name('invitations');
+//League Admin
+Route::controller(InvitationController::class)->middleware(['auth', 'verified'])->group(function () {
 
-Route::get('/invite-friend', function () {
-    return view('invitations/invite-friend');
-})->middleware(['auth', 'verified'])->name('invite-friend');
+    Route::get('/invitations', 'index')->name('invitations');
+    Route::get('/invitations/create', 'create')->name('invitations.create');//form to create an invitation
+    Route::post('/invitation', 'store')->name('invitation.store');
+    // Route::put('/invitations/{invitation}', 'update')->name('invitation.update');//Accept invitation
+    Route::delete('/invitation/{invitation}', 'softDelete')->name('invitation.softDelete');
+});
+
+
+Route::controller(InvitationReceivedController::class)->middleware(['auth', 'verified'])->group(function () {
+    
+    Route::put('/invitation/{invitation}/accept', 'accept')->name('invitation.accept');
+    Route::put('/invitation/{invitation}/decline', 'decline')->name('invitation.decline');
+
+});
+
+Route::controller(TrashController::class)->middleware(['auth', 'verified'])->group(function () {
+
+    Route::get('/invitations/trash', 'index')->name('invitations.trash');//trash page
+    Route::put('/invitation/trash/{invitation}/restore', 'restore')->name('invitation.restore')->withTrashed();
+    Route::delete('/invitation/trash/{invitation}/destroy', 'forceDelete')->name('invitation.forceDelete')->withTrashed();
+});
+
+
 
 require __DIR__.'/auth.php';
