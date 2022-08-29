@@ -2,7 +2,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Invite a friend to your League') }}
+            {{ __('Invite friends to your League ') }}
         </h2>
     </x-slot>
     
@@ -14,14 +14,16 @@
                     <!-- Validation Errors -->
                     <x-auth-validation-errors class="mb-4" :errors="$errors" />
     
-                    <form method="POST" action="{{ route('invitation.create') }}">
+                    <form method="POST" action="{{ route('invitation.store') }}">
                         @csrf
-    
                         <!-- Email Name -->
                         <div>
                             <x-label for="email" :value="__('Email')" />
-    
-                            <x-input id="" class="block mt-1 w-full" type="text" name="email" :value="old('email')" required autofocus />
+                            <x-input id="" class="border-2 block mt-1 w-full" type="text" name="email" :value="old('email')" />
+                            
+                            {{-- @error('email')
+                                {{ $message }}
+                            @enderror --}}
                         </div>
     
                         <div class="flex items-center justify-end mt-4">

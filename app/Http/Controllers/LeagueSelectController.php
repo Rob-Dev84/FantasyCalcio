@@ -27,11 +27,20 @@ class LeagueSelectController extends Controller
         //     return response(null, 409);
         // }
 
+        
 
+        //This method will work only for the user who owens the League (Leaguue Admin) 
         $selectLeague = $league->user()->first()->userSetting()->update([
             // 'user_id' => $request->user()->id,
             'league_id' => $league->id,
         ]);
+
+        //Check when user accepts invitation, it automatically select the league. If yes, just update here
+
+        $selectLeagueGuest = UserSetting::first()->update([
+            'league_id' => $league->id,
+        ]);
+
    
         return back();
     }

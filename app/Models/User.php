@@ -2,9 +2,6 @@
 
 namespace App\Models;
 
-// use App\Models\User;
-// use App\Models\League;
-// use App\Models\UserSetting;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -53,6 +50,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(League::class);
     }
 
+    public function leagueOwnedBy()
+    {
+        return $this->hasOneThrough(League::class, UserSetting::class, 'user_id', 'user_id'); 
+    }
 
     //relationship to retrieve the user setting (for now the seleceted league)
     public function userSetting()
@@ -60,11 +61,32 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(UserSetting::class);
     }
 
+    //invitations() pull out the invitations from the User League Admin
+    public function invitations() //better to call this method sentInvitation()
+    {
+        return $this->hasManyThrough(Invitation::class,  UserSetting::class, 'id', 'league_id');
+    }
+
+    public function recievedInvitation()//user can recieve one invitation per league
+    {
+        return $this->hasOneThrough(Invitation::class, UserSetting::class, 'id', 'league_id');
+    }
+
+    // public function recievedInvitations()//user can recieve one invitation per league
+    // {
+    //     return $this->hasOneThrough(Invitation::class, League::class, 'id', 'league_id');
+    // }
+
+    public function receivedInvitations()//this pulls out all the invitations from all leagues (on pending)
+    {
+        return $this->hasMany(Invitation::class);
+    }
+
     //Get the team Through the userSetting model
     public function team()
     {
         return $this->hasOneThrough(Team::class, UserSetting::class, 'league_id', 'league_id');
     }
-    
+
     
 }

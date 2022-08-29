@@ -21,4 +21,8 @@ class LeaguePolicy
         //check if user id on user table, matchs the user_id in the league table (if user owns the league)
         return $user->id === $league->user_id;
     }
+
+    //Invitation
+
+    
 }

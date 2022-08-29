@@ -80,7 +80,13 @@
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
                                 <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
-                                    <div>{{ __('Invitations') }}</div>
+                                    <div>{{ __('Invitations') }}
+                                        {{-- Red spot to show user something new --}}
+                                        @if (Auth::user()->receivedInvitations()->where('confirmed', NULL)->count())
+                                        <sup class="w-2 h-2 inline-block rounded-full mt-0.5 bg-red-500"></sup>
+                                        @endif
+                                        
+                                    </div>
         
                                     <div class="ml-1">
                                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -89,16 +95,46 @@
                                     </div>
                                 </button>
                             </x-slot>
-        
+                            
                             <x-slot name="content">
-                                <!-- Invitations -->
-                                    <x-dropdown-link :href="route('invitations')" :active="request()->routeIs('invitations')">
-                                        {{ __('Check Invitation') }}
-                                    </x-dropdown-link>
-                                    
-                                    <x-dropdown-link :href="route('invite-friend')" :active="request()->routeIs('invite-friend')">
-                                        {{ __('Invite friends') }}
-                                    </x-dropdown-link>
+                                {{-- Invitations (only admin league can add friends) --}}
+                                
+                                {{-- Check if user_id of league selected is the same as user_id of League Admin --}}
+                                {{-- {{ dd(Auth::user()->leagueOwnedBy->userSetting) }} --}}
+                                @if (Auth::user()->leagueOwnedBy->userSetting)
+                                <x-dropdown-link :href="route('invitations.create')" :active="request()->routeIs('invitations.create')">
+                                    {{ __('Invite friends') }}
+                                </x-dropdown-link>
+                                @else
+                                <x-dropdown-link class="opacity-30">
+                                    {{ __('Invite friends') }}
+                                </x-dropdown-link>
+                                @endif
+                                <hr>
+
+                                @if (Auth::user()->userSetting->league_id || Auth::user()->recievedInvitation)
+                                <x-dropdown-link :href="route('invitations')" :active="request()->routeIs('invitations')">
+                                    {{ __('Invitation Management') }}
+                                </x-dropdown-link>
+                                @else
+                                <x-dropdown-link class="opacity-30">
+                                    {{ __('Invitations Management') }}
+                                </x-dropdown-link>
+                                @endif
+                                <hr>
+
+                                @if (Auth::user()->leagueOwnedBy->userSetting && Auth::user()->invitations()->onlyTrashed()->count())
+                                <x-dropdown-link :href="route('invitations.trash')" :active="request()->routeIs('invitations/trash')">
+                                    {{ __('Invitations Trash') }}
+                                    {{-- @if (Auth::user()->invitations()->onlyTrashed()->count())
+                                        <sup class="w-2 h-2 inline-block rounded-full mt-0.5 bg-red-500"></sup>
+                                    @endif --}}
+                                </x-dropdown-link>
+                                @else
+                                <x-dropdown-link class="opacity-30">
+                                    {{ __('Invitations Trash') }}
+                                </x-dropdown-link>
+                                @endif
                             </x-slot>
                         </x-dropdown>
                     </div>
@@ -151,7 +187,7 @@
                 {{ __('Invitations') }}
             </x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('invite-friend')" :active="request()->routeIs('invite-friend')">
+            <x-responsive-nav-link :href="route('invitations.create')" :active="request()->routeIs('invitations.create')">
                 {{ __('invite-friends') }}
             </x-responsive-nav-link>
         </div>

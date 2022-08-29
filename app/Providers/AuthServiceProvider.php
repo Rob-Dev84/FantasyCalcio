@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Models\League;
+use App\Models\Invitation;
 use App\Policies\LeaguePolicy;
+use App\Policies\InvitationPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -17,6 +19,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
         League::class => LeaguePolicy::class,
+        Invitation::class => InvitationPolicy::class,
     ];
 
     /**

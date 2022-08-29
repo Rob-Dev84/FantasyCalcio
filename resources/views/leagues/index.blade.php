@@ -7,12 +7,12 @@
 
 
 
-    <div class="py-12">
+    <div class="pt-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
 
-                    My leagues
+                    {{ __('My leagues as Admin') }}
 
                 </div>
             </div>
@@ -22,7 +22,7 @@
     @if ($leagues->count())
             @foreach ($leagues as $league)
             <ol>
-                <div class="py-2">
+                <div class="pt-1">
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                             <div class="pl-6 py-2 bg-white border-b border-gray-200">
@@ -41,9 +41,9 @@
                                             </x-button>
                                         </form>
                                         @else
-                                        <x-button class="ml-4 bg-green-500">
+                                        <div class="py-2 px-4 uppercase text-xs text-white font-semibold tracking-widest rounded-md bg-green-500">
                                             {{ __('Selected') }}
-                                        </x-button>
+                                        </div>
                                         @endif
                                         
 
@@ -66,7 +66,60 @@
                 @endforeach
                             
                 @else
-                    <p>You don't have any league yet</p>
+                    <p>You don't own any league yet</p>
+                @endif
+            </ol>
+    <div class="pt-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+
+                    {{ __('My leagues as Guess') }}
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    @if ($receivedInvitations->count())
+            @foreach ($receivedInvitations as $receivedInvitation)
+                @if ($receivedInvitation->confirmed)
+                <ol>
+                    <div class="pt-1">
+                        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                                <div class="pl-6 py-2 bg-white border-b border-gray-200">
+                            
+                                    <li class="flex items-center justify-between">
+                                        <div>
+                                        {{ $leagues_guest->name }} 
+                                        </div>
+                                        <div class="flex items-center justify-end pr-6">
+                                            @if ($leagueSelected->league_id != $receivedInvitation->league_id)
+                                            <form action="{{ route('leagues.select', $receivedInvitation->league_id) }}" method="POST">
+                                                @csrf
+                                                @method('PUT') 
+                                                <x-button class="ml-4">
+                                                    {{ __('Select') }}
+                                                </x-button>
+                                            </form>
+                                            @else
+                                            <div class="py-2 px-4 uppercase text-xs text-white font-semibold tracking-widest rounded-md bg-green-500">
+                                                {{ __('Selected') }}
+                                            </div>
+                                            @endif
+                                        </div>
+                                    </li>
+                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+                @endforeach
+                            
+                @else
+                    <p>You don't have League invitation to display</p>
                 @endif
             </ol>
     <div class="py-12">
@@ -74,7 +127,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
 
-                    Create new league     
+                   {{ __('Create new league (move to create.blade.php file)') }}   
 
                 </div>
             </div>
