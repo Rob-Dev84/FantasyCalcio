@@ -50,10 +50,16 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(League::class);
     }
 
-    public function leagueOwnedBy()
-    {
-        return $this->hasOneThrough(League::class, UserSetting::class, 'user_id', 'user_id'); 
-    }
+    // public function leagueOwnedBy()
+    // {
+    //     return $this->hasOne(League::class);
+    // }
+    
+
+    // public function leagueOwnedBy()
+    // {
+    //     return $this->hasOneThrough(League::class, UserSetting::class, 'user_id', 'user_id'); 
+    // }
 
     //relationship to retrieve the user setting (for now the seleceted league)
     public function userSetting()
@@ -80,6 +86,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function receivedInvitations()//this pulls out all the invitations from all leagues (on pending)
     {
         return $this->hasMany(Invitation::class);
+    }
+
+    public function leagueReceivedInvitation()//this pulls out all the invitations from all leagues (on pending)
+    {
+        return $this->hasOneThrough(Invitation::class, League::class, 'user_id', 'user_id');
     }
 
     //Get the team Through the userSetting model

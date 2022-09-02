@@ -2,11 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TeamController;
-use App\Http\Controllers\LeagueController;
+use App\Http\Controllers\League\LeagueController;
 use App\Http\Controllers\InvitationController;
-use App\Http\Controllers\LeagueSelectController;
+use App\Http\Controllers\League\LeagueSelectController;
 use App\Http\Controllers\Invitation\TrashController;
 use App\Http\Controllers\InvitationReceivedController;
+use App\Http\Controllers\League\LeagueTrashController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,12 +58,22 @@ Route::get('/league', function () {//This will go to the controller
 Route::controller(LeagueController::class)->middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/leagues', 'index')->name('leagues');
-    // Route::get('/leagues{league}', 'show')->name('leagues.show');
+    Route::get('/leagues/create', 'create')->name('leagues.create');//form to create a league
+    
+
     Route::post('/league', 'store');
     
     Route::delete('/leagues/{league}/softDelete', 'softDelete')->name('leagues.softDelete');
-    Route::post('/leagues/{league}/restore', 'restore')->name('leagues.restore');
-    Route::delete('/leagues/{league}/forceDelete', 'forceDelete')->name('leagues.forceDelete');//We're using the {id}, but the root model binding {league}
+    // Route::post('/leagues/{league}/restore', 'restore')->name('leagues.restore');
+    // Route::delete('/leagues/{league}/forceDelete', 'forceDelete')->name('leagues.forceDelete');//We're using the {id}, but the root model binding {league}
+});
+
+Route::controller(LeagueTrashController::class)->middleware(['auth', 'verified'])->group(function () {
+    
+    Route::get('/leagues/trash', 'index')->name('leagues.trash');//trash page
+    Route::put('/league/{league}/restore', 'restore')->name('league.restore')->withTrashed();
+    Route::put('/league/{league}/forceDelete', 'forceDelete')->name('league.forceDelete')->withTrashed();
+
 });
 
 Route::put('/leagues/{league}/select', [LeagueSelectController::class, 'update'])->middleware(['auth', 'verified'])->name('leagues.select');

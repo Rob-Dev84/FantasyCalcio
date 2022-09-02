@@ -40,11 +40,14 @@ class InvitationController extends Controller
 
         }
 
+        $leagueOwnedBy = League::where('id', Auth::user()->userSetting->league_id)->first();
+
         return view('invitations.index', [
             'receivedInvitations' => $receivedInvitations,
             'receivedInvitation' => $receivedInvitation,
             'sentInvitations' => $sentInvitations,
             'league' => $league, 
+            'leagueOwnedBy' => $leagueOwnedBy, 
         ]);
     }
 
@@ -78,16 +81,10 @@ class InvitationController extends Controller
 
         /* I alredy checked the emails on validation above. I don't need these checks below */
 
-        // if ($request->email === Auth::user()->email) {//Autoinvitation
-        //     return "You can invited yourself";
-        //     die();
-        // }
+        // 1. Autoinvitation
 
-        // if ($invitation) {//Avoid duplicates
-        //     return 'You already invited this user to your League';
-        //     die();
-        // }
-
+        // 2. Avoid duplicates
+        
         // $trashedInvitation = Invitation::where('email', $request->email)
         //                                 ->where('league_id', $league->league_id)
         //                                 ->withTrashed()
@@ -97,6 +94,9 @@ class InvitationController extends Controller
         //     return 'You already invited this user but is in your invitation trash. You can make the invitation by restoring it';
         //     die();
         // }
+
+        // TODO - Add policy that checks if user owns the league. 
+        // auth()->user()->leagues->contains(auth()->user()->userSetting->league_id 
         
         $league = UserSetting::where('user_id', Auth::user()->id)->first();
 

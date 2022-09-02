@@ -1,0 +1,6 @@
+  invitation          [m 5798736 [[34morigin/invitation[m] create full invitation section with emails and trash
+* [32mleague              [m 5dcc9a7 [[34morigin/league[m] create basic league logic
+  main                [m 5d00dc8 [[34morigin/main[m] solve merge confict
+  navigation-menu     [m d9abd1c [[34morigin/navigation-menu[m] Add nav & subnav. Created some view blade pages
+  team                [m 8954569 [[34morigin/team[m] add team security policy
+  user-login-extension[m 2483d22 [[34morigin/user-login-extension[m] added surname and username on register form - Bug

@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-// use App\Models\User;
-// use App\Models\UserSetting;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -48,7 +46,7 @@ class League extends Model
 
     // public function leagueOwnedBy(User $user)
     // {
-    //     return $this->user->contains('user_id', $user->id); 
+    //     return $this->leagues->contains('user_id', $user->id); 
     // }
 
     //relationship to retrieve the user setting (for now the seleceted league)
@@ -60,6 +58,11 @@ class League extends Model
     public function invitations()
     {
         return $this->hasManyThrough(Invitation::class, UserSetting::class, 'league_id', 'league_id'); 
+    }
+
+    public function invitationsLeague() //better to call this method sentInvitation()
+    {
+        return $this->hasMany(Invitation::class);
     }
 
     public function teams()

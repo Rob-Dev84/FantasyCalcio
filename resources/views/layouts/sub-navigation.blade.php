@@ -25,16 +25,24 @@
         
                             <x-slot name="content">
                                 <!-- Leagues -->
-                                    <x-dropdown-link :href="route('market')" :active="request()->routeIs('market')">
-                                        {{ __('Leagues not found') }}
+                                    <x-dropdown-link :href="route('leagues.create')" :active="request()->routeIs('leagues.create')">
+                                        {{ __('Create new league') }}
                                     </x-dropdown-link>
                                     <hr>
                                     <x-dropdown-link :href="route('leagues')" :active="request()->routeIs('leagues')">
                                         {{ __('Leagues management') }}
                                     </x-dropdown-link>
-                                    <x-dropdown-link :href="route('leagues')" :active="request()->routeIs('leagues')">
-                                        {{ __('Create new league') }}
+                                    <hr>
+                                    @if (Auth::user()->leagues()->onlyTrashed()->count())
+                                    <x-dropdown-link :href="route('leagues.trash')" :active="request()->routeIs('leagues.trash')">
+                                        {{ __('Leagues trash') }}
                                     </x-dropdown-link>
+                                    @else
+                                    <x-dropdown-link title="Trash is empty" class="opacity-30">
+                                        {{ __('Leagues trash') }}
+                                    </x-dropdown-link>
+                                    @endif
+                                    
                             </x-slot>
                         </x-dropdown>
                     </div>
@@ -98,10 +106,8 @@
                             
                             <x-slot name="content">
                                 {{-- Invitations (only admin league can add friends) --}}
-                                
                                 {{-- Check if user_id of league selected is the same as user_id of League Admin --}}
-                                {{-- {{ dd(Auth::user()->leagueOwnedBy->userSetting) }} --}}
-                                @if (Auth::user()->leagueOwnedBy->userSetting)
+                                @if (auth()->user()->leagues->contains(auth()->user()->userSetting->league_id))
                                 <x-dropdown-link :href="route('invitations.create')" :active="request()->routeIs('invitations.create')">
                                     {{ __('Invite friends') }}
                                 </x-dropdown-link>
@@ -112,7 +118,7 @@
                                 @endif
                                 <hr>
 
-                                @if (Auth::user()->userSetting->league_id || Auth::user()->recievedInvitation)
+                                @if (Auth::user()->leagueOwnedBy !== NULL || Auth::user()->recievedInvitation !== NULL)
                                 <x-dropdown-link :href="route('invitations')" :active="request()->routeIs('invitations')">
                                     {{ __('Invitation Management') }}
                                 </x-dropdown-link>
@@ -123,7 +129,7 @@
                                 @endif
                                 <hr>
 
-                                @if (Auth::user()->leagueOwnedBy->userSetting && Auth::user()->invitations()->onlyTrashed()->count())
+                                @if (Auth::user()->leagueOwnedBy !== NULL && Auth::user()->invitations()->onlyTrashed()->count())
                                 <x-dropdown-link :href="route('invitations.trash')" :active="request()->routeIs('invitations/trash')">
                                     {{ __('Invitations Trash') }}
                                     {{-- @if (Auth::user()->invitations()->onlyTrashed()->count())

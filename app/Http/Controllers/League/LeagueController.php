@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\League;
 
 use App\Models\League;
 use App\Models\Invitation;
 use App\Models\UserSetting;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -42,13 +43,15 @@ class LeagueController extends Controller
         $leagues_guest = NULL;
 
         //Get all user Invitation received (use relationship un user model, to get the invitation table and the league name)
-        $receivedInvitations = Invitation::get()->where('email', Auth::user()->email);
+        $receivedInvitations = Invitation::get()->where('user_id', Auth::user()->id);
 
         if ($receivedInvitations) {
             //Get league name (better a join between invitation/league table)
             foreach ($receivedInvitations as $receivedInvitation) {
 
-                $leagues_guest = League::find($receivedInvitation->league_id);
+                $leagues_guest = League::withTrashed()->find($receivedInvitation->league_id);
+
+                // dd($leagues_guest);
 
             }
         }
@@ -76,7 +79,7 @@ class LeagueController extends Controller
      */
     public function create()
     {
-        //
+        return view('leagues.create');
     }
 
     /**
@@ -145,7 +148,8 @@ class LeagueController extends Controller
         //Or we can use updateOrCreate()
         // UserSetting::updateOrCreate(['user_id' => $user_id], ['league_id' => $league_id]);
 
-        return back();
+        // return back();
+        return redirect('leagues');
     }
 
     /**
@@ -192,7 +196,9 @@ class LeagueController extends Controller
      */
     public function softDelete(Request $request, League $league)
     {
-        // dd($league->id);
+
+        //Check if user owns the league
+        $this->authorize('userLeagueAdmin', $league);
 
         //Delete using unser and leagues methods and check the league id to delete. It won't work if user try to change the id value
         $request->user()->leagues()->where('id', $league->id)->delete();
@@ -202,28 +208,43 @@ class LeagueController extends Controller
             'league_id' => null,
         ]);
 
+        //Loop the userSettings table
+        $leaguesSelected = UserSetting::where('league_id', $league->id)->get();
+
+        if ($leaguesSelected->count()) {
+            //If user has league selected, update to null (we don't want user guess to access to a deleted league)
+            foreach ($leaguesSelected as $leagueSelected) {
+                $league->userSetting->update([
+                    'league_id' => null,
+                ]);
+            }
+        }
+
         return back();
     }
 
 
+    
+    // public function restore(Request $request, $id)
+    // {
+    //     //here we use the id to restore the league
 
-    public function restore(Request $request, $id)
-    {
-        //here we use the id to restore the league
+    //     //    $league = League::onlyTrashed()->findOrFail($id);
+    //     //    $league->restore();
 
-    //    $league = League::onlyTrashed()->findOrFail($id);
-    //    $league->restore();
+    //     //Check if user owns the league
+    //     $this->authorize('userLeagueAdmin', $league);
 
-       $request->user()->leagues()->where('id', $id)->restore();
-       return back();
-    }
+    //    $request->user()->leagues()->where('id', $id)->restore();
+    //    return back();
+    // }
 
     
 
-    public function forceDelete(Request $request, $id)
-    {
-        // dd($league_deleted);
-        $request->user()->leagues()->where('id', $id)->forceDelete();
-        return back();
-    }
+    // public function forceDelete(Request $request, $id)
+    // {
+    //     // dd($league_deleted);
+    //     $request->user()->leagues()->where('id', $id)->forceDelete();
+    //     return back();
+    // }
 }
