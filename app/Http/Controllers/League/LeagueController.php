@@ -5,8 +5,9 @@ namespace App\Http\Controllers\League;
 use App\Models\League;
 use App\Models\Invitation;
 use App\Models\UserSetting;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class LeagueController extends Controller
@@ -95,7 +96,7 @@ class LeagueController extends Controller
             'league_type' => 'required|integer|between:1,1',
             'market_type' => 'required|integer|between:1,1',
             'score_type' => 'required|integer|between:1,1',
-            'budget' => 'required|integer|between:350,500',
+            'budget' => 'required|integer|between:150,500',
         ]);
 
         //instead of adding user_id manually: 'usder_id' => auth->id(), we can use this hand notation: $request->user()->leagues()->create([])
@@ -171,9 +172,13 @@ class LeagueController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, League $league)
     {
-        //
+        $this->authorize('userLeagueAdmin', $league);
+
+        return view('leagues.edit', [
+            'league' => $league,
+        ]);
     }
 
     /**
@@ -183,9 +188,31 @@ class LeagueController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, League $league)
     {
-        //
+        
+        $this->validate($request, [
+            'name' => ['required', //Ignore unique teame when user update name and Keep Unique team name per league 
+                        Rule::unique('leagues', 'name')->ignore($league, 'name')
+                                                        ->where('user_id', auth()->user()->id)
+                                                        ->where('id', auth()->user()->userSetting->league_id),    
+            'min:3|max:25'],
+            'league_type' => 'required|integer|between:1,1',
+            'market_type' => 'required|integer|between:1,1',
+            'score_type' => 'required|integer|between:1,1',
+            'budget' => 'required|integer|between:150,500',
+        ]);
+
+        League::where('id', auth()->user()->userSetting->league_id)->first()->update([
+            'name' => $request->name,
+            'league_type_id' => $request->league_type,
+            'market_type_id' => $request->market_type,
+            'score_type_id' => $request->score_type,
+            'budget' => $request->budget,
+        ]);
+
+        return redirect('leagues');
+        
     }
 
     /**
@@ -223,28 +250,4 @@ class LeagueController extends Controller
         return back();
     }
 
-
-    
-    // public function restore(Request $request, $id)
-    // {
-    //     //here we use the id to restore the league
-
-    //     //    $league = League::onlyTrashed()->findOrFail($id);
-    //     //    $league->restore();
-
-    //     //Check if user owns the league
-    //     $this->authorize('userLeagueAdmin', $league);
-
-    //    $request->user()->leagues()->where('id', $id)->restore();
-    //    return back();
-    // }
-
-    
-
-    // public function forceDelete(Request $request, $id)
-    // {
-    //     // dd($league_deleted);
-    //     $request->user()->leagues()->where('id', $id)->forceDelete();
-    //     return back();
-    // }
 }

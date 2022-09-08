@@ -21,6 +21,13 @@ class InvitationPolicy
         
     }
 
+    // public function userLeagueAdminInvite(User $user)
+    // {       
+    //     $league = League::where('id', auth()->user()->userSetting->league_id)->first();
+         
+    //     return $user->id === $league->user_id;
+    // }
+
     public function userOwnedInvitation(User $user, Invitation $invitation)
     {   
 

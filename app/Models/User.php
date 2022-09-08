@@ -55,11 +55,11 @@ class User extends Authenticatable implements MustVerifyEmail
     //     return $this->hasOne(League::class);
     // }
     
-
-    // public function leagueOwnedBy()
-    // {
-    //     return $this->hasOneThrough(League::class, UserSetting::class, 'user_id', 'user_id'); 
-    // }
+    //To display invitation admin trash
+    public function leagueOwnedBy()
+    {
+        return $this->hasOneThrough(League::class, UserSetting::class, 'user_id', 'user_id'); 
+    }
 
     //relationship to retrieve the user setting (for now the seleceted league)
     public function userSetting()
