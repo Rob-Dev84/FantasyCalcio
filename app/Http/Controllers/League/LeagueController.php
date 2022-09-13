@@ -44,7 +44,7 @@ class LeagueController extends Controller
         $leagues_guest = NULL;
 
         //Get all user Invitation received (use relationship un user model, to get the invitation table and the league name)
-        $receivedInvitations = Invitation::get()->where('user_id', Auth::user()->id);
+        $receivedInvitations = Invitation::withTrashed()->where('user_id', Auth::user()->id)->get();
 
         if ($receivedInvitations) {
             //Get league name (better a join between invitation/league table)

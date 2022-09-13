@@ -50,6 +50,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(League::class);
     }
 
+    public function leaguesInfo()
+    {
+        return $this->hasMany(League::class, LeagueType::class, MarketType::class, ScoreType::class,);
+    }
+
     // public function leagueOwnedBy()
     // {
     //     return $this->hasOne(League::class);
@@ -70,7 +75,7 @@ class User extends Authenticatable implements MustVerifyEmail
     //invitations() pull out the invitations from the User League Admin
     public function invitations() //better to call this method sentInvitation()
     {
-        return $this->hasManyThrough(Invitation::class,  UserSetting::class, 'id', 'league_id');
+        return $this->hasManyThrough(Invitation::class,  UserSetting::class, 'league_id', 'league_id')->withTrashed();
     }
 
     public function recievedInvitation()//user can recieve one invitation per league
@@ -85,7 +90,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function receivedInvitations()//this pulls out all the invitations from all leagues (on pending)
     {
-        return $this->hasMany(Invitation::class);
+        return $this->hasMany(Invitation::class, 'email', 'email')->withTrashed();
     }
 
     public function leagueReceivedInvitation()//this pulls out all the invitations from all leagues (on pending)

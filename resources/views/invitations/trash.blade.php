@@ -6,10 +6,8 @@
     </x-slot>
 
 {{-- Visible only to the league Admin --}}
-
-    {{-- @if (Auth::user()->id === $league->user_id)  --}}
-    
-    @if (Auth::user()->leagueOwnedBy->userSetting) {{-- Here we check if 'id_user' form the league table matches the 'user_id' from userSetting table --}}
+    {{-- {{ dd(auth()->user()->leagues->contains(auth()->user()->userSetting->league_id)); }} --}}
+    @if (auth()->user()->leagues->contains(auth()->user()->userSetting->league_id)) {{-- Here we check if 'id_user' form the league table matches the 'user_id' from userSetting table --}}
     
     <div class="pt-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -25,10 +23,10 @@
     </div>
 
 {{-- loop trashed here --}}
-        @if($invitations)
+        {{-- @if($invitations) --}}
 
-        @foreach ($invitations as $invitation)
-        {{-- {{ dd($recievedInvitation) }} --}}
+        @forelse ($invitations as $invitation)
+ 
         <div class="pt-1">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -42,16 +40,16 @@
                                     <form action="{{ route('invitation.restore', $invitation) }}" method="POST">
                                         @csrf
                                         @method('PUT') 
-                                        <x-button class="ml-4 bg-green-500">
-                                            {{ __('Restore') }}
+                                        <x-button class="ml-4 w-8 h-8 flex justify-center bg-green-500">
+                                            <i title="{{ __('Restore') }}" class="fa-solid fa-rotate-left"></i>
                                         </x-button>
                                     </form>
 
                                     <form action="{{ route('invitation.forceDelete', $invitation) }}" method="POST">
                                         @csrf
                                         @method('DELETE') 
-                                        <x-button class="ml-4 bg-red-500">
-                                            {{ __('Delete') }}
+                                        <x-button class="ml-4 w-8 h-8 flex justify-center bg-red-500">
+                                            <i title="{{ __('Delete permanently') }}" class="fa-solid fa-eraser"></i>
                                         </x-button>
                                     </form>
                                 </div>
@@ -62,9 +60,9 @@
                 </div>
             </div>
         </div>
-        @endforeach
+        @endforelse
         
-        @endif
+        {{-- @endif --}}
     @endif
 
 

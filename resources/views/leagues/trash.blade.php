@@ -20,7 +20,7 @@
     </div>
     @foreach ($leagues as $league)
     <ol>
-        <div class="py-2">
+        <div class="pt-1">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="pl-6 py-2 bg-white border-b border-gray-200">
@@ -35,17 +35,17 @@
                                 <form action="{{ route('league.restore', $league) }}" method="POST">
                                     @csrf
                                     @method('PUT')
-                                    <x-button class="ml-4">
-                                        {{ __('Restore') }}
+                                    <x-button class="ml-4 w-8 h-8 flex justify-center bg-green-500">
+                                        <i title="{{ __('Restore') }}" class="fa-solid fa-rotate-left"></i>
                                     </x-button>
                                 </form>
 
                                 {{-- To fix: Force Delete --}}
                                 <form action="{{ route('league.forceDelete', $league) }}" method="POST">
                                     @csrf
-                                    @method('DELETE') 
-                                    <x-button class="ml-4 bg-red-500">
-                                        {{ __('Delete') }}
+                                    @method('DELETE')
+                                    <x-button class="ml-4 w-8 h-8 flex justify-center bg-red-500">
+                                        <i title="{{ __('Delete permanently') }}" class="fa-solid fa-eraser"></i>
                                     </x-button>
                                 </form>
               

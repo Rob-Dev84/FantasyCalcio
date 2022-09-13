@@ -13,26 +13,33 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        <i class="fa-solid fa-chart-simple"></i>
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
                     <x-nav-link :href="route('market')" :active="request()->routeIs('market')">
+                        <i class="fa-solid fa-shop"></i>
+                        {{-- <i class="fa-solid fa-shop-lock"></i> --}}
                         {{ __('Market') }}
                     </x-nav-link>
 
                     <x-nav-link :href="route('roster')" :active="request()->routeIs('roster')">
+                        <i class="fa-solid fa-people-group"></i>
                         {{ __('Roster') }}
                     </x-nav-link>
 
                     <x-nav-link :href="route('lineup')" :active="request()->routeIs('lineup')">
+                        <i class="fa-solid fa-clipboard"></i>
                         {{ __('Line up') }}
                     </x-nav-link>
 
                     <x-nav-link :href="route('matches')" :active="request()->routeIs('matches')">
+                        <i class="fa-regular fa-calendar"></i>
                         {{ __('Matches') }}
                     </x-nav-link>
 
                     <x-nav-link :href="route('standings')" :active="request()->routeIs('standings')">
+                        <i class="fa-solid fa-chart-bar"></i>
                         {{ __('Standings') }}
                     </x-nav-link>
                 </div>
@@ -44,7 +51,10 @@
                     <x-slot name="trigger">
                         <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
                             {{-- <div>{{ Auth::user()->name }}</div> --}}
-                            <div>{{ Auth::user()->username }}</div>
+                            <div>
+                                <i class="fa-solid fa-user"></i>
+                                {{ Auth::user()->username }}
+                            </div>
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />

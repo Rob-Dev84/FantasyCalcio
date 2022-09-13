@@ -24,7 +24,8 @@ class InvitationController extends Controller
     {
         
         //Get all user Invitation received
-        $receivedInvitations = Invitation::get()->where('email', auth()->user()->email);
+        //TODO - Check this query. Probably you can delete it, because we ritched this query using ELOQUENT directly in the index.blade.php file
+        $receivedInvitations = Invitation::where('email', auth()->user()->email)->get();
 
         // $sentInvitations = Invitation::get()->where('league_id', Auth::user()->userSetting->league->id);
         $sentInvitations = Invitation::get()->where('league_id', auth()->user()->userSetting->league_id);
@@ -91,11 +92,8 @@ class InvitationController extends Controller
         
 
         //Policy here - because is create from form, I cannot use policy authorize() method
-        if (auth()->user()->id !== $league->user_id) {
-            return abort(403);
-        }
-
-        // $this->authorize('userLeagueAdminInvite');
+        abort_if(auth()->user()->id !== $league->user_id, code: 403);
+        
 
         $invitation = Invitation::where('email', $request->email)
                                   ->where('league_id', $league->league_id)

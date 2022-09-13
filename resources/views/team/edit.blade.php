@@ -17,25 +17,21 @@
                 <form method="POST" action="{{ route('team.update', $team) }}">
                     @csrf
                     @method('PUT')
-
-                    <!-- Team Name -->
-                    <div>
+                    <div class="py-2">
                         <x-label for="name" :value="__('Team Name')" />
-
                         <x-input id="" class="block mt-1 w-full" type="text" name="name" :value="$team->name" required autofocus />
                     </div>
 
-                    <!-- Stadium Name -->
-                    <div>
+                    <div class="py-2">
                         <x-label for="stadium" :value="__('Stadium Name')" />
-
                         <x-input id="" class="block mt-1 w-full" type="text" name="stadium" :value="$team->stadium" required autofocus />
                     </div>
 
-
                     <div class="flex items-center justify-end mt-4">
                         <a href="{{ route('team') }}" class="">
-                            {{ __('Back') }}
+                            <x-tag class="bg-gray-500">
+                                {{ __('Back') }}
+                            </x-tag>
                         </a>
                         <x-button class="ml-4">
                             {{ __('Modify Team') }}

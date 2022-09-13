@@ -14,7 +14,7 @@
     {{-- I want to check if userSetting->league_id === --}}
 
     {{-- {{ dd(auth()->user()->leagues->contains(Auth::user()->userSetting->league_id)) }} --}}
-    @if (Auth::user()->userSetting->league_id === NULL)
+    @if (auth()->user()->userSetting->league_id === NULL)
         <div class="p-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -22,17 +22,14 @@
                         <div>
                         {{ __("League is not selected. Invitation is not avaible") }}
                         </div>
-                        <div class="opacity-70 py-2 px-4 uppercase text-xs text-white font-semibold tracking-widest rounded-md bg-gray-500">
+                        <x-tag class="opacity-40 bg-gray-500">
                             {{ __('Invite') }}
-                        </div>
+                        </x-tag>
                     </div>
                 </div>
             </div>
         </div>
-    @endif
-
-
-    @if (!auth()->user()->leagues->contains(Auth::user()->userSetting->league_id))
+    @elseif(!auth()->user()->leagues->contains(auth()->user()->userSetting->league_id))
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -40,9 +37,9 @@
                         <div>
                         {{ __("Only League Admin can invite other friends") }}
                         </div>
-                        <div class="opacity-70 py-2 px-4 uppercase text-xs text-white font-semibold tracking-widest rounded-md bg-gray-500">
+                        <x-tag class="opacity-40 bg-gray-500">
                             {{ __('Invite') }}
-                        </div>
+                        </x-tag>
                     </div>
                 </div>
             </div>
@@ -52,7 +49,7 @@
     
     
 
-    @if (auth()->user()->leagues->contains(Auth::user()->userSetting->league_id)) {{-- Here we check if 'id_user' form the league table matches the 'user_id' from userSetting table --}}
+    @if (auth()->user()->leagues->contains(auth()->user()->userSetting->league_id)) {{-- Here we check if 'id_user' form the league table matches the 'user_id' from userSetting table --}}
     
         <div class="pt-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -89,33 +86,24 @@
                                 </div>
                                 <div class="flex items-center justify-end pr-6">
                                     @if ($sentInvitation->confirmed === 1)
-                                    {{-- <x-button class="ml-4 bg-green-500">
+                                    <x-tag class="opacity-70 bg-green-500">
                                         {{ __('Accepted') }}
-                                    </x-button> --}}
-                                    <div class="opacity-70 py-2 px-4 uppercase text-xs text-white font-semibold tracking-widest rounded-md bg-green-500">
-                                        {{ __('Accepted') }}
-                                    </div>
+                                    </x-tag>
                                     @elseif($sentInvitation->confirmed === NULL)
-                                    {{-- <x-button class="ml-4 bg-orange-500">
+                                    <x-tag class="opacity-70 bg-orange-500">
                                         {{ __('Pending') }}
-                                    </x-button> --}}
-                                    <div class="opacity-70 py-2 px-4 uppercase text-xs text-white font-semibold tracking-widest rounded-md bg-orange-500">
-                                        {{ __('Pending') }}
-                                    </div>
+                                    </x-tag>
                                     @else
-                                    {{-- <x-button class="ml-4 bg-red-500">
+                                    <x-tag class="opacity-70 bg-red-500">
                                         {{ __('Declined') }}
-                                    </x-button> --}}
-                                    <div class="opacity-70 py-2 px-4 uppercase text-xs text-white font-semibold tracking-widest rounded-md bg-red-500">
-                                        {{ __('Declined') }}
-                                    </div>
+                                    </x-tag>
                                     @endif
 
                                     <form action="{{ route('invitation.softDelete', $sentInvitation) }}" method="POST">
                                         @csrf
                                         @method('DELETE') 
-                                        <x-button class="ml-4 bg-red-500">
-                                            {{ __('Delete') }}
+                                        <x-button class="ml-4 w-8 h-8 flex justify-center bg-red-500">
+                                            <i title="{{ __('Delete') }}" class="fa-solid fa-trash"></i>
                                         </x-button>
                                     </form>
                                 </div>
@@ -161,13 +149,16 @@
                             </div>
                             <div class="flex items-center justify-end pr-6">
                             @if($receivedInvitation->confirmed === 1)
-                                <div class="opacity-70 py-2 px-4 uppercase text-xs text-white font-semibold tracking-widest rounded-md bg-green-500">
+                                <x-tag class="bg-green-500">
                                     {{ __('Accepted') }}
-                                </div>
+                                </x-tag>
                                 @elseif($receivedInvitation->confirmed === 0)
-                                <div class="opacity-70 py-2 px-4 uppercase text-xs text-white font-semibold tracking-widest rounded-md bg-red-500">
+                                {{-- <div class="opacity-70 py-2 px-4 uppercase text-xs text-white font-semibold tracking-widest rounded-md bg-red-500">
                                     {{ __('Declined') }}
-                                </div>
+                                </div> --}}
+                                <x-tag class="opacity-70 bg-red-500">
+                                    {{ __('Declined') }}
+                                </x-tag>
                                 @else
                                 <form action="{{ route('invitation.accept', $receivedInvitation) }}" method="POST">
                                     @csrf

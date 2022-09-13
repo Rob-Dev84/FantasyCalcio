@@ -125,7 +125,7 @@ Route::group(['middleware' => 'auth', 'verified'], function() {
 
     Route::controller(InvitationTrashController::class)->group(function () {
 
-        Route::get('/invitations/trash', 'index')->name('invitations.trash');//trash page
+        Route::get('/invitations/trash', 'index')->name('invitations.trash');//TODO - add a middleware that allows to access the page only is user selects the league
         Route::put('/invitation/trash/{invitation}/restore', 'restore')->name('invitation.restore')->withTrashed();
         Route::delete('/invitation/trash/{invitation}/destroy', 'forceDelete')->name('invitation.forceDelete')->withTrashed();
     });

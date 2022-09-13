@@ -13,7 +13,10 @@
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
                                 <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
-                                    <div>{{ __('My Leagues') }}</div>
+                                    <div>
+                                        <i class="fa-solid fa-list"></i>
+                                        {{ __('My Leagues') }}
+                                    </div>
         
                                     <div class="ml-1">
                                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -26,19 +29,23 @@
                             <x-slot name="content">
                                 <!-- Leagues -->
                                     <x-dropdown-link :href="route('leagues.create')" :active="request()->routeIs('leagues.create')">
+                                        <i class="fa-solid fa-plus"></i>
                                         {{ __('Create new league') }}
                                     </x-dropdown-link>
                                     <hr>
                                     <x-dropdown-link :href="route('leagues')" :active="request()->routeIs('leagues')">
+                                        <i class="fa-solid fa-bars-progress"></i>
                                         {{ __('Leagues management') }}
                                     </x-dropdown-link>
                                     <hr>
                                     @if (Auth::user()->leagues()->onlyTrashed()->count())
                                     <x-dropdown-link :href="route('leagues.trash')" :active="request()->routeIs('leagues.trash')">
+                                        <i class="fa-solid fa-trash"></i>
                                         {{ __('Leagues trash') }}
                                     </x-dropdown-link>
                                     @else
                                     <x-dropdown-link title="Trash is empty" class="opacity-30">
+                                        <i class="fa-solid fa-trash"></i>
                                         {{ __('Leagues trash') }}
                                     </x-dropdown-link>
                                     @endif
@@ -65,18 +72,21 @@
                             <x-slot name="content">
                                 <!-- Team -->
                                 {{-- {{ dd(Auth::user()->team); }} --}}
-                                @if (Auth::user()->team)
+                                @if (auth()->user()->team)
                                 <x-dropdown-link class="opacity-30">
-                                {{ __('Create Team') }}
+                                    <i class="fa-solid fa-plus"></i>
+                                    {{ __('Create Team') }}
                                 </x-dropdown-link> 
                                 @else
                                 <x-dropdown-link :href="route('team.create')" :active="request()->routeIs('team.create')">
-                                {{ __('Create Team') }}
+                                    <i class="fa-solid fa-plus"></i>
+                                    {{ __('Create Team') }}
                                 </x-dropdown-link>                                    
                                 @endif
 
                                 <hr>
                                 <x-dropdown-link :href="route('team')" :active="request()->routeIs('team')">
+                                    <i class="fa-solid fa-bars-progress"></i>
                                     {{ __('Team Management') }}
                                 </x-dropdown-link>
                             </x-slot>
@@ -88,9 +98,11 @@
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
                                 <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
-                                    <div>{{ __('Invitations') }}
+                                    <div>
+                                        <i class="fa-solid fa-right-left"></i>
+                                        {{ __('Invitations') }}
                                         {{-- Red spot to show user something new --}}
-                                        @if (Auth::user()->receivedInvitations()->where('confirmed', NULL)->count())
+                                        @if (auth()->user()->receivedInvitations()->where('confirmed', NULL)->count())
                                         <sup class="w-2 h-2 inline-block rounded-full mt-0.5 bg-red-500"></sup>
                                         @endif
                                         
@@ -109,35 +121,46 @@
                                 {{-- Check if user_id of league selected is the same as user_id of League Admin --}}
                                 @if (auth()->user()->leagues->contains(auth()->user()->userSetting->league_id))
                                 <x-dropdown-link :href="route('invitations.create')" :active="request()->routeIs('invitations.create')">
+                                    <i class="fa-solid fa-plus"></i>
                                     {{ __('Invite friends') }}
                                 </x-dropdown-link>
                                 @else
                                 <x-dropdown-link class="opacity-30">
+                                    <i class="fa-solid fa-plus"></i>
                                     {{ __('Invite friends') }}
                                 </x-dropdown-link>
                                 @endif
                                 <hr>
 
-                                @if (Auth::user()->leagueOwnedBy !== NULL || Auth::user()->recievedInvitation !== NULL)
+                                @if (auth()->user()->leagueOwnedBy !== NULL || auth()->user()->recievedInvitation !== NULL)
                                 <x-dropdown-link :href="route('invitations')" :active="request()->routeIs('invitations')">
+                                    <i class="fa-solid fa-bars-progress"></i>
                                     {{ __('Invitation Management') }}
                                 </x-dropdown-link>
                                 @else
                                 <x-dropdown-link class="opacity-30">
+                                    <i class="fa-solid fa-bars-progress"></i>
                                     {{ __('Invitations Management') }}
                                 </x-dropdown-link>
                                 @endif
                                 <hr>
 
-                                @if (Auth::user()->leagueOwnedBy !== NULL && Auth::user()->invitations()->onlyTrashed()->count())
+                            {{-- //TODO - Trash Invitation avaible if League is selected and League Admin --}}
+                            {{-- {{ dd(auth()->user()->invitations); }} --}}
+                                @if (auth()->user()->leagues->contains(auth()->user()->userSetting->league_id) && auth()->user()->invitations()->onlyTrashed()->count() > 0)
                                 <x-dropdown-link :href="route('invitations.trash')" :active="request()->routeIs('invitations/trash')">
+                                    <i class="fa-solid fa-trash"></i>
                                     {{ __('Invitations Trash') }}
                                     {{-- @if (Auth::user()->invitations()->onlyTrashed()->count())
                                         <sup class="w-2 h-2 inline-block rounded-full mt-0.5 bg-red-500"></sup>
                                     @endif --}}
                                 </x-dropdown-link>
+                                
                                 @else
+                                
+
                                 <x-dropdown-link class="opacity-30">
+                                    <i class="fa-solid fa-trash"></i>
                                     {{ __('Invitations Trash') }}
                                 </x-dropdown-link>
                                 @endif
@@ -152,16 +175,25 @@
             </div>
 
             <!-- League/Team Name -->
-            <div class="hidden sm:flex sm:items-center sm:ml-6 text-white">
-                @if (Auth::user()->userSetting->league)
+            <div class="hidden sm:flex text-white flex flex-col justify-center items-start">
+                <span class="">
+                {{-- @if (auth()->user()->userSetting->league) --}}
+                {{-- <i class="fa-solid fa-tag"></i> --}}
+                <i class="fa-solid fa-trophy"></i>
                 {{ __('League: ') }}
-                {{ Auth::user()->userSetting->league->name }} 
-                @endif
-                
-                @if (Auth::user()->team)
+                {{ (auth()->user()->userSetting->league) ? (auth()->user()->userSetting->league->name) : 'Select League'; }} 
+                {{-- @endif --}}
+                </span>
+                <span>
+                {{-- @if (auth()->user()->team) --}}
+                <i class="fa-solid fa-shirt"></i>
                 {{ __('Team: ') }}
-                {{ Auth::user()->team->name }}    
-                @endif
+                {{ (auth()->user()->team) ? (auth()->user()->team->name) : 'Select Team'; }} 
+                {{-- {{ auth()->user()->team->name }}     --}}
+                {{-- @endif --}}
+                </span>
+
+                {{-- {{ auth()->user()->email }} --}}
                 
                 
             </div>
