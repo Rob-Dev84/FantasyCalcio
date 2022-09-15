@@ -5,10 +5,13 @@ namespace App\Http\Controllers\League;
 use App\Models\League;
 use App\Models\Invitation;
 use App\Models\UserSetting;
+// use App\Models\LeagueType;
+// use App\Models\League\LeagueType;
+// use App\Models\League\MarketType;
+// use App\Models\League\ScoreType;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 
 class LeagueController extends Controller
 {
@@ -32,19 +35,14 @@ class LeagueController extends Controller
     {
       
         //Show all the user Leagues avaible, with the get() method, per user_id 
-        $leagues = League::get()->where('user_id', Auth::user()->id);
-
-        //Show all the user Leagues in trash (probably you can use the fist one, retreive all leagues, included the trashed, and in blade file add condition)
-        $leagues_deleted = League::onlyTrashed()->get()->where('user_id', Auth::user()->id);
-
-        //Get user league_id selected
-        $leagueSelected = UserSetting::where('user_id', Auth::user()->id)->first();
+        $leagues = League::where('user_id', auth()->user()->id)->with(['leagueType', 'marketType', 'scoreType'])->get();
+        // $leagues = League::with('user')->get();
 
         $receivedInvitations = NULL;
         $leagues_guest = NULL;
 
         //Get all user Invitation received (use relationship un user model, to get the invitation table and the league name)
-        $receivedInvitations = Invitation::withTrashed()->where('user_id', Auth::user()->id)->get();
+        $receivedInvitations = Invitation::withTrashed()->where('user_id', auth()->user()->id)->get();
 
         if ($receivedInvitations) {
             //Get league name (better a join between invitation/league table)
@@ -52,20 +50,12 @@ class LeagueController extends Controller
 
                 $leagues_guest = League::withTrashed()->find($receivedInvitation->league_id);
 
-                // dd($leagues_guest);
-
             }
         }
-
-        
-        
-
         
         //Here we put the league into an array. You need to iterate in you view file (leagues/index.blade.php)
         return view('leagues.index', [
             'leagues' => $leagues,
-            'leagues_deleted' => $leagues_deleted,
-            'leagueSelected' => $leagueSelected,
             'receivedInvitations' => $receivedInvitations,
             'leagues_guest' => $leagues_guest,
         ]);
@@ -118,7 +108,7 @@ class LeagueController extends Controller
         //select league_id from user:setting table
         // $league_id_selected = UserSetting::where('user_id', Auth::user()->id)->first(['league_id'])->league_id;
 
-        $league_id_selected = UserSetting::where('user_id', Auth::user()->id)->first();
+        $league_id_selected = UserSetting::where('user_id', auth()->user()->id)->first();
 
         if (!$league_id_selected) {//Create
 
@@ -129,7 +119,7 @@ class LeagueController extends Controller
         } 
         if ($league_id_selected) {//update
 
-            UserSetting::first()->where('user_id', Auth::user()->id)->update([
+            UserSetting::first()->where('user_id', auth()->user()->id)->update([
                 'league_id' => $league_id,
             ]);
 
@@ -231,11 +221,14 @@ class LeagueController extends Controller
         $request->user()->leagues()->where('id', $league->id)->delete();
 
         //If user deleted the selected league, update the league_id to NULL
-        $league->user()->first()->userSetting()->update([
-            'league_id' => null,
-        ]);
+        if ($league->id === auth()->user()->UserSetting->league_id) {
+            $league->user()->first()->userSetting()->update([
+                'league_id' => null,
+            ]);
+        }
+        
 
-        //Loop the userSettings table
+        //Get all user who have the league selected and update to NULL
         $leaguesSelected = UserSetting::where('league_id', $league->id)->get();
 
         if ($leaguesSelected->count()) {

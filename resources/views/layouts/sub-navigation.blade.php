@@ -38,7 +38,7 @@
                                         {{ __('Leagues management') }}
                                     </x-dropdown-link>
                                     <hr>
-                                    @if (Auth::user()->leagues()->onlyTrashed()->count())
+                                    @if (auth()->user()->leagues()->onlyTrashed()->count())
                                     <x-dropdown-link :href="route('leagues.trash')" :active="request()->routeIs('leagues.trash')">
                                         <i class="fa-solid fa-trash"></i>
                                         {{ __('Leagues trash') }}
@@ -233,8 +233,8 @@
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
-                <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                <div class="font-medium text-base text-gray-800">{{ auth()->user()->name }}</div>
+                <div class="font-medium text-sm text-gray-500">{{ auth()->user()->email }}</div>
             </div>
 
             <div class="mt-3 space-y-1">

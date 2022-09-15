@@ -4,7 +4,7 @@
 
 {{ __('Hi ') }} {{ $user->name }} {{ ',' }}
 
-{{ Auth::user()->name }} {{ Auth::user()->surname }} {{ __(' invited you to join the league: ') }} <b>{{ Auth::user()->userSetting->league->name }}</b> 
+{{ auth()->user()->name }} {{ auth()->user()->surname }} {{ __(' invited you to join the league: ') }} <b>{{ auth()->user()->userSetting->league->name }}</b> 
 
 {{ __('Login and go to the invitations section to accept it.') }}
 

@@ -17,23 +17,25 @@
             </div>
         </div>
   
-        {{-- {{ dd($receivedInvitations) }} --}}
+        {{-- {{ dd(auth()->user()->leagues) }} --}}
+
   
     <div class="pt-1">
         @if ($leagues->count())
          
         <x-table.table :headers="['Name','League','Market','Score','Budget',['name' => 'Actions', 'class' => 'text-center']]">
-            @foreach ($leagues as $league)   
+            @foreach ($leagues as $league)
+            {{-- {{ dd($league); }}    --}}
                 <tr class="border-b border-gray-200">
                     <x-table.td>{{ $league->name }}</x-table.td>
-                    <x-table.td>{{ $league->league_type_id }}</x-table.td>
-                    <x-table.td>{{ $league->market_type_id }}</x-table.td>
-                    <x-table.td>{{ $league->score_type_id }}</x-table.td>
+                    <x-table.td>{{ $league->leagueType->name }}</x-table.td>
+                    <x-table.td>{{ $league->marketType->name }}</x-table.td>
+                    <x-table.td>{{ $league->scoreType->name }}</x-table.td>
                     <x-table.td>{{ $league->budget }}</x-table.td>
                     
                     <x-table.td class="flex justify-center">
                     {{-- <td class="px-2 py-3 flex items-center justify-center"> --}}
-                        @if ($leagueSelected->league_id != $league->id)
+                        @if (auth()->user()->userSetting->league_id !== $league->id)
                         <form action="{{ route('leagues.select', $league) }}" method="POST">
                             @csrf
                             @method('PUT') 
@@ -115,9 +117,9 @@
                         <span title="">{{ $leagues_guest->name }}</span>
                         @endif
                     </x-table.td>
-                    <x-table.td>{{ $leagues_guest->league_type_id }}</x-table.td>
-                    <x-table.td>{{ $leagues_guest->market_type_id }}</x-table.td>
-                    <x-table.td>{{ $leagues_guest->score_type_id }}</x-table.td>
+                    <x-table.td>{{ $leagues_guest->leagueType->name }}</x-table.td>
+                    <x-table.td>{{ $leagues_guest->MarketType->name }}</x-table.td>
+                    <x-table.td>{{ $leagues_guest->scoreType->name }}</x-table.td>
                     <x-table.td>{{ $leagues_guest->budget }}</x-table.td>
                     
                     <x-table.td class="flex justify-center">

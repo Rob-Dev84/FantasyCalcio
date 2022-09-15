@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('leagues_type', function (Blueprint $table) {
-            $table->string('name', 25)->after('id');
+        Schema::create('market_types', function (Blueprint $table) {
+            $table->id();
+            $table->string('name', 25);
+            // $table->timestamps();
         });
     }
 
@@ -25,8 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('leagues_type', function (Blueprint $table) {
-            $table->dropColumn('name');
-        });
+        Schema::dropIfExists('market_types');
     }
 };

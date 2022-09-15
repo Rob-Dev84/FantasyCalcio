@@ -22,15 +22,9 @@ class InvitationTrashController extends Controller
     public function index()
     {
         //TODO - use a better way to achive that. Probably middleware
-        if (auth()->user()->userSetting->league_id === NULL) {
+        if (auth()->user()->userSetting->league_id === NULL || !auth()->user()->leagues->contains(auth()->user()->userSetting->league_id)) {
             return redirect('invitations');
         }
-
-        //BUG - I want that works only form League Admin
-        if (auth()->user()->leagues->contains(auth()->user()->userSetting->league_id)) {
-            return redirect('invitations');
-        }
-
         
     
         $invitations = Invitation::onlyTrashed()

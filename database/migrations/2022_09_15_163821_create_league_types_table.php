@@ -13,10 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('scores_type', function (Blueprint $table) {
+        Schema::create('league_types', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('name', 25);
+            // $table->timestamps();
         });
+        
     }
 
     /**
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('scores_type');
+        Schema::dropIfExists('league_types');
     }
 };

@@ -4,7 +4,7 @@
 
 {{ __('Hi ') }} {{ $userAdmin->name }} {{ ',' }}
 
-{{ Auth::user()->name }} {{ Auth::user()->surname }} {{ __(' joint your league: ') }} <b>{{ $leagueAdmin->name }}</b>
+{{ auth()->user()->name }} {{ auth()->user()->surname }} {{ __(' joint your league: ') }} <b>{{ $leagueAdmin->name }}</b>
 
 {{ __("If you accidentally made a wrong invitation, you can still login and delete it from the Invitations section.") }}
 

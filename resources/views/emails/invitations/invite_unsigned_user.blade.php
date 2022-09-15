@@ -4,7 +4,7 @@
 
 {{ __('Welcome to FantasyCalcio.') }}
 
-{{ Auth::user()->name }} {{ Auth::user()->surname }} {{ __(' invited you to join the league: ') }} <b>{{ Auth::user()->userSetting->league->name }}</b>
+{{ auth()->user()->name }} {{ auth()->user()->surname }} {{ __(' invited you to join the league: ') }} <b>{{ auth()->user()->userSetting->league->name }}</b>
 
 {{ __('Sign up your account and go to the invitations section to accept it.') }}
 

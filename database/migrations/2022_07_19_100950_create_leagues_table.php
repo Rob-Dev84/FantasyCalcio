@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->string('name', 25)->unique();
-            $table->foreignId('league_type_id');
-            $table->foreignId('market_type_id');
-            $table->foreignId('score_type_id');
+            $table->foreignId('league_type_id')->constrained();
+            $table->foreignId('market_type_id')->constrained();
+            $table->foreignId('score_type_id')->constrained();
             $table->smallInteger('budget');
             $table->timestamps();
         });

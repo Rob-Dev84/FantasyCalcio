@@ -60,6 +60,7 @@
                 </div>
             </div>
         </div>
+        @empty
         @endforelse
         
         {{-- @endif --}}
