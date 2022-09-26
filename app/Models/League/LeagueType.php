@@ -13,6 +13,8 @@ class LeagueType extends Model
         'name',
     ];
 
+    public $timestamps = false;
+
 
     // public function league()
     // {

@@ -13,13 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('user_settings', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');//If user deletes their account, the id users_setting will be deleted
-            $table->foreignId('league_id')->onDelete('cascade')->nullable();//on soft delete league the league_id here will be null
+            $table->string('name', 25)->unique();
             $table->timestamps();
         });
-        
     }
 
     /**
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_settings');
+        Schema::dropIfExists('roles');
     }
 };

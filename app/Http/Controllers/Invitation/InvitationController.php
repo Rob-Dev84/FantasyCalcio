@@ -22,17 +22,22 @@ class InvitationController extends Controller
      */
     public function index()
     {
+
+        //In case the $invitations is NULL we call the initial condition
+        $receivedInvitation = NULL;
+        $league = NULL;
+        $leagueOwnedBy = NULL;
+        $sentInvitations = NULL;
         
         //Get all user Invitation received
         //TODO - Check this query. Probably you can delete it, because we ritched this query using ELOQUENT directly in the index.blade.php file
         $receivedInvitations = Invitation::where('email', auth()->user()->email)->get();
 
-        // $sentInvitations = Invitation::get()->where('league_id', Auth::user()->userSetting->league->id);
-        $sentInvitations = Invitation::get()->where('league_id', auth()->user()->userSetting->league_id);
-
-        //In case the $invitations is NULL we call the initial condition
-        $receivedInvitation = NULL;
-        $league = NULL;
+        if (auth()->user()->userSetting) {
+            $sentInvitations = Invitation::get()->where('league_id', auth()->user()->userSetting->league_id);
+        }
+        
+        
 
         foreach ($receivedInvitations as $receivedInvitation) {
             
@@ -40,14 +45,15 @@ class InvitationController extends Controller
 
         }
 
-        $leagueOwnedBy = League::where('id', auth()->user()->userSetting->league_id)->first();
+        // $leagueOwnedBy = League::where('id', auth()->user()->userSetting->league_id)->first();
+        // $leagueOwnedBy = League::where('id', auth()->user()->userSetting->league_id)->first();
 
         return view('invitations.index', [
             'receivedInvitations' => $receivedInvitations,
             'receivedInvitation' => $receivedInvitation,
             'sentInvitations' => $sentInvitations,
             'league' => $league, 
-            'leagueOwnedBy' => $leagueOwnedBy, 
+            // 'leagueOwnedBy' => $leagueOwnedBy, 
         ]);
     }
 

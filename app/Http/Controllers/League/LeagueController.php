@@ -38,6 +38,8 @@ class LeagueController extends Controller
         $leagues = League::where('user_id', auth()->user()->id)->with(['leagueType', 'marketType', 'scoreType'])->get();
         // $leagues = League::with('user')->get();
 
+        // dd($leagues);
+
         $receivedInvitations = NULL;
         $leagues_guest = NULL;
 
@@ -48,7 +50,7 @@ class LeagueController extends Controller
             //Get league name (better a join between invitation/league table)
             foreach ($receivedInvitations as $receivedInvitation) {
 
-                $leagues_guest = League::withTrashed()->find($receivedInvitation->league_id);
+                $leagues_guest = League::where('id', $receivedInvitation->league_id)->first();
 
             }
         }

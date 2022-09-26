@@ -23,8 +23,7 @@ return new class extends Migration
     {
         Schema::create('invitations', function (Blueprint $table) {
             $table->id();
-            // $table->foreignId('user_id')->onDelete('cascade')->nullable()->constrained()->default(null);
-            $table->foreignId('user_id')->nullable()->onDelete('cascade')->constrained()->default(null);
+            $table->foreignId('user_id')->onDelete('cascade')->nullable()->constrained()->default(null);
             $table->foreignId('league_id')->constrained()->onDelete('cascade');
             $table->string('email');
             $table->boolean('confirmed')->nullable()->default(null);

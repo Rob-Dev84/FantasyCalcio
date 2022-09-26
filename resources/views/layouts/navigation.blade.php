@@ -17,11 +17,21 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('market')" :active="request()->routeIs('market')">
-                        <i class="fa-solid fa-shop"></i>
-                        {{-- <i class="fa-solid fa-shop-lock"></i> --}}
-                        {{ __('Market') }}
-                    </x-nav-link>
+                    @if (!auth()->user()->UserSetting || auth()->user()->UserSetting->league_id === NULL || !auth()->user()->team)
+                        <x-nav-link class="opacity-30" title="You need to select a league">
+                            <i class="fa-solid fa-shop"></i>
+                            {{-- <i class="fa-solid fa-shop-lock"></i> --}}
+                            {{ __('Market') }}
+                        </x-nav-link>
+                    @else
+                        <x-nav-link :href="route('markets', [auth()->user()->UserSetting->league, auth()->user()->team])" :active="request()->routeIs('market')">
+                            <i class="fa-solid fa-shop"></i>
+                            {{-- <i class="fa-solid fa-shop-lock"></i> --}}
+                            {{ __('Market') }}
+                        </x-nav-link>
+                    @endif
+
+                    
 
                     <x-nav-link :href="route('roster')" :active="request()->routeIs('roster')">
                         <i class="fa-solid fa-people-group"></i>

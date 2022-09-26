@@ -51,28 +51,33 @@ class TeamController extends Controller
         // dd($request->team()->user_id);
         $this->validate($request, [
             'name' => ['required', //Unique team name per league 
-                        Rule::unique('teams')->where('user_id', Auth::user()->id, 'league_id', Auth::user()->userSetting->league_id),    
+                        Rule::unique('teams')->where('user_id', auth()->user()->id, 'league_id', auth()->user()->userSetting->league_id),    
                         'min:3|max:25'],
             'stadium' => 'required|min:3|max:25'
         ]);
 
         //Get user league_id selected
-        $league = UserSetting::where('user_id', Auth::user()->id)->first();
+        // $league = UserSetting::where('user_id', Auth::user()->id)->first();
 
         //Get user team per league selected
-        $team = team::where('user_id', Auth::user()->id)->where('league_id', $league->league_id)->first();
+        // $team = team::where('user_id', Auth::user()->id)->where('league_id', $league->league_id)->first();
 
         //Create new team if user hasn't created one yet
-        if ($team) {
-            return back();
-            die();
-        }
+        // if ($team) {
+        //     return back();
+        //     die();
+        // }
+
+        $league = League::where('id', auth()->user()->userSetting->league_id)->first();
+
+        // dd($league);
 
         $request->user()->team()->create([
-            'user_id' => Auth::user()->id,
-            'league_id' => $league->league_id,
+            'user_id' => auth()->user()->id,
+            'league_id' => auth()->user()->userSetting->league_id,
             'name' => $request->name,
             'stadium' => $request->stadium,
+            'budget' => $league->budget,
         ]);
 
         return redirect('team');

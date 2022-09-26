@@ -1,0 +1,555 @@
+role,name,team,current_value,initial_value,league_type_id,active
+GK,Maignan,Milan,19,18,1,1
+GK,Meret,Napoli,17,14,1,1
+GK,Musso,Atalanta,15,13,1,1
+GK,Sepe,Salernitana,13,8,1,1
+GK,Handanovic,Inter,13,16,1,1
+GK,Szczesny,Juventus,13,16,1,1
+GK,Silvestri,Udinese,13,10,1,1
+GK,Rui Patricio,Roma,12,14,1,1
+GK,Vicario,Empoli,12,9,1,1
+GK,Consigli,Sassuolo,11,11,1,1
+GK,Provedel,Lazio,11,7,1,1
+GK,Gollini,Fiorentina,10,12,1,1
+GK,Montipo',Verona,10,11,1,1
+GK,Skorupski,Bologna,9,11,1,1
+GK,Falcone,Lecce,9,5,1,1
+GK,Perin,Juventus,8,1,1,1
+GK,Berisha,Torino,8,11,1,1
+GK,Audero,Sampdoria,8,10,1,1
+GK,Radu I.,Cremonese,8,5,1,1
+GK,Cragno,Monza,8,11,1,1
+GK,Luis Maximiano,Lazio,8,12,1,1
+GK,Dragowski,Spezia,7,7,1,1
+GK,Milinkovic-Savic V.,Torino,7,1,1,1
+GK,Terracciano,Fiorentina,4,1,1,1
+GK,Di Gregorio,Monza,4,1,1,1
+GK,Sportiello,Atalanta,1,1,1,1
+GK,Mirante,Milan,1,1,1,1
+GK,Sarr M.,Cremonese,1,1,1,1
+GK,Tatarusanu,Milan,1,1,1,1
+GK,Lamanna,Monza,1,1,1,1
+GK,Ujkani,Empoli,1,1,1,1
+GK,Pegolo,Sassuolo,1,1,1,1
+GK,Perilli,Verona,1,1,1,1
+GK,Padelli,Udinese,1,1,1,1
+GK,Perisan,Empoli,1,1,1,1
+GK,Bardi,Bologna,1,1,1,1
+GK,Cordaz,Inter,1,1,1,1
+GK,Pinsoglio,Juventus,1,1,1,1
+GK,Fiorillo,Salernitana,1,1,1,1
+GK,Sirigu,Napoli,1,1,1,1
+GK,Cerofolini,Fiorentina,1,1,1,1
+GK,Rossi F.,Atalanta,1,1,1,1
+GK,Contini,Sampdoria,1,1,1,1
+GK,Brancolini,Lecce,1,1,1,1
+GK,Carnesecchi,Cremonese,1,1,1,1
+GK,Bleve,Lecce,1,1,1,1
+GK,Berardi A.,Verona,1,1,1,1
+GK,Russo A.,Sassuolo,1,1,1,1
+GK,Gemello,Torino,1,1,1,1
+GK,Ravaglia,Sampdoria,1,1,1,1
+GK,Zoet,Spezia,1,1,1,1
+GK,Boer,Roma,1,1,1,1
+GK,Adamonis,Lazio,1,1,1,1
+GK,Marfella,Napoli,1,1,1,1
+GK,Zovko,Spezia,1,1,1,1
+GK,Piana,Udinese,1,1,1,1
+GK,Bagnolini,Bologna,1,1,1,1
+GK,Onana,Inter,1,1,1,1
+GK,Svilar,Roma,1,1,1,1
+GK,Sorrentino A.,Monza,1,1,1,1
+GK,Ciezkowski,Cremonese,1,1,1,1
+GK,Micai,Salernitana,1,1,1,1
+GK,Chiesa M.,Verona,1,1,1,1
+GK,Saro,Cremonese,1,1,1,1
+D,Hernandez T.,Milan,19,20,1,1
+D,Dumfries,Inter,19,20,1,1
+D,Bremer,Juventus,17,18,1,1
+D,Gosens,Inter,16,19,1,1
+D,Smalling,Roma,16,14,1,1
+D,Udogie,Udinese,16,13,1,1
+D,Demiral,Atalanta,15,13,1,1
+D,Bastoni S.,Spezia,15,12,1,1
+D,Kim,Napoli,15,13,1,1
+D,Skriniar,Inter,14,17,1,1
+D,Di Lorenzo,Napoli,14,15,1,1
+D,Rodrigo Becao,Udinese,14,10,1,1
+D,Calabria,Milan,13,13,1,1
+D,Ibanez,Roma,13,9,1,1
+D,Rrahmani,Napoli,13,14,1,1
+D,Tomori,Milan,13,15,1,1
+D,Parisi,Empoli,13,8,1,1
+D,Bonucci,Juventus,12,15,1,1
+D,Toloi,Atalanta,12,8,1,1
+D,Bastoni,Inter,12,15,1,1
+D,Danilo,Juventus,12,12,1,1
+D,Kalulu,Milan,12,14,1,1
+D,Vojvoda,Torino,12,9,1,1
+D,Mazzocchi,Salernitana,12,7,1,1
+D,Dodo',Fiorentina,12,14,1,1
+D,Biraghi,Fiorentina,11,13,1,1
+D,Romagnoli,Lazio,11,11,1,1
+D,Spinazzola,Roma,11,12,1,1
+D,Darmian,Inter,11,9,1,1
+D,Singo,Torino,11,14,1,1
+D,Faraoni,Verona,10,13,1,1
+D,Milenkovic,Fiorentina,10,11,1,1
+D,Rodriguez R.,Torino,10,7,1,1
+D,Lazzari,Lazio,10,10,1,1
+D,Mancini,Roma,10,10,1,1
+D,Valeri,Cremonese,10,5,1,1
+D,Dimarco,Inter,9,8,1,1
+D,De Vrij,Inter,9,10,1,1
+D,Zappacosta,Atalanta,9,11,1,1
+D,Maehle,Atalanta,9,8,1,1
+D,Doig,Verona,9,6,1,1
+D,Lucumi',Bologna,9,9,1,1
+D,Mario Rui,Napoli,8,9,1,1
+D,Medel,Bologna,8,7,1,1
+D,Karsdorp,Roma,8,10,1,1
+D,Colley,Sampdoria,8,9,1,1
+D,Kyriakopoulos,Sassuolo,8,6,1,1
+D,Mari',Monza,8,11,1,1
+D,Erlic,Sassuolo,8,9,1,1
+D,Casale,Lazio,8,9,1,1
+D,Cambiaso,Bologna,8,9,1,1
+D,Daniliuc,Salernitana,8,7,1,1
+D,Schuurs,Torino,8,9,1,1
+D,Masina,Udinese,7,6,1,1
+D,Ghiglione,Cremonese,7,5,1,1
+D,Patric,Lazio,7,5,1,1
+D,De Silvestri,Bologna,7,9,1,1
+D,Alex Sandro,Juventus,7,8,1,1
+D,Ferrari G.,Sassuolo,7,8,1,1
+D,Fazio,Salernitana,7,6,1,1
+D,Hateboer,Atalanta,7,9,1,1
+D,Palomino,Atalanta,7,10,1,1
+D,Nuytinck,Udinese,7,7,1,1
+D,Djidji,Torino,7,5,1,1
+D,Igor,Fiorentina,7,9,1,1
+D,Celik,Roma,7,7,1,1
+D,Bellanova,Inter,7,8,1,1
+D,Ismajli,Empoli,7,3,1,1
+D,Martinez Quarta,Fiorentina,7,4,1,1
+D,Stojanovic,Empoli,7,7,1,1
+D,Soppy,Atalanta,7,7,1,1
+D,Kiwior,Spezia,7,6,1,1
+D,Carlos Augusto,Monza,7,8,1,1
+D,Posch,Bologna,7,8,1,1
+D,D'ambrosio,Inter,6,8,1,1
+D,Juan Jesus,Napoli,6,7,1,1
+D,Acerbi,Inter,6,8,1,1
+D,Chiriches,Cremonese,6,5,1,1
+D,Pezzella Giu.,Lecce,6,6,1,1
+D,Djimsiti,Atalanta,6,7,1,1
+D,Marusic,Lazio,6,7,1,1
+D,Umtiti,Lecce,6,7,1,1
+D,Buongiorno,Torino,6,4,1,1
+D,Reca,Spezia,6,5,1,1
+D,Lazaro,Torino,6,7,1,1
+D,Augello,Sampdoria,6,7,1,1
+D,Toljan,Sassuolo,6,5,1,1
+D,Ampadu,Spezia,6,6,1,1
+D,Scalvini,Atalanta,6,6,1,1
+D,Pongracic,Lecce,6,6,1,1
+D,Perez N.,Udinese,6,8,1,1
+D,Kasius,Bologna,6,2,1,1
+D,Baschirotto,Lecce,6,2,1,1
+D,Olivera,Napoli,6,7,1,1
+D,Bronn,Salernitana,6,5,1,1
+D,Hien,Verona,6,6,1,1
+D,Ferrari A.,Sampdoria,5,5,1,1
+D,Hysaj,Lazio,5,6,1,1
+D,De Sciglio,Juventus,5,6,1,1
+D,Florenzi,Milan,5,7,1,1
+D,Bianchetti,Cremonese,5,4,1,1
+D,Sala,Spezia,5,5,1,1
+D,Caldara,Spezia,5,6,1,1
+D,Ceccherini,Verona,5,6,1,1
+D,Bereszynski,Sampdoria,5,6,1,1
+D,Rogerio,Sassuolo,5,5,1,1
+D,Marlon,Monza,5,7,1,1
+D,Kjaer,Milan,5,5,1,1
+D,Lykogiannis,Bologna,5,4,1,1
+D,Gunter,Verona,5,5,1,1
+D,Sernicola,Cremonese,5,3,1,1
+D,Nikolaou,Spezia,5,4,1,1
+D,Bradaric,Salernitana,5,7,1,1
+D,Ostigard,Napoli,5,7,1,1
+D,Bijol,Udinese,5,5,1,1
+D,Sambia,Salernitana,5,7,1,1
+D,Aiwu,Cremonese,5,5,1,1
+D,Lochoshvili,Cremonese,5,3,1,1
+D,Thiaw,Milan,5,6,1,1
+D,Ranocchia,Monza,4,6,1,1
+D,Rugani,Juventus,4,5,1,1
+D,Luperto,Empoli,4,5,1,1
+D,Gyomber,Salernitana,4,4,1,1
+D,Murru,Sampdoria,4,5,1,1
+D,Depaoli,Verona,4,4,1,1
+D,Bonifazi,Bologna,4,4,1,1
+D,Hristov,Spezia,4,3,1,1
+D,Aina,Torino,4,5,1,1
+D,Walukiewicz,Empoli,4,4,1,1
+D,Okoli,Atalanta,4,5,1,1
+D,Kumbulla,Roma,4,4,1,1
+D,Soumaoro,Bologna,4,5,1,1
+D,Lovato,Salernitana,4,6,1,1
+D,Caldirola,Monza,4,4,1,1
+D,Ayhan,Sassuolo,4,5,1,1
+D,Dest,Milan,4,5,1,1
+D,Amian,Spezia,4,6,1,1
+D,Vasquez,Cremonese,4,6,1,1
+D,De Winter,Empoli,4,4,1,1
+D,Gatti,Juventus,4,5,1,1
+D,Birindelli,Monza,4,3,1,1
+D,Gendrey,Lecce,4,4,1,1
+D,Ebosse,Udinese,4,4,1,1
+D,Hendry,Cremonese,4,4,1,1
+D,Marrone,Monza,3,4,1,1
+D,Radovanovic,Salernitana,3,5,1,1
+D,Murillo,Sampdoria,3,3,1,1
+D,Zortea,Atalanta,3,2,1,1
+D,Dawidowicz,Verona,3,4,1,1
+D,Gallo,Lecce,3,2,1,1
+D,Cetin,Lecce,3,5,1,1
+D,Muldur,Sassuolo,3,5,1,1
+D,Carboni,Monza,3,5,1,1
+D,Tuia,Lecce,3,3,1,1
+D,Ebuehi,Empoli,3,3,1,1
+D,Holm,Spezia,3,2,1,1
+D,Zima,Torino,3,5,1,1
+D,Coppola D.,Verona,3,2,1,1
+D,Quagliata,Cremonese,3,3,1,1
+D,Ehizibue,Udinese,3,4,1,1
+D,Dermaku,Lecce,2,4,1,1
+D,Izzo,Monza,2,3,1,1
+D,Fares,Lazio,2,2,1,1
+D,Venuti,Fiorentina,2,3,1,1
+D,Donati,Monza,2,4,1,1
+D,Terzic,Fiorentina,2,2,1,1
+D,Pirola,Salernitana,2,4,1,1
+D,Ballo-Toure',Milan,2,2,1,1
+D,Amione,Sampdoria,2,2,1,1
+D,Gila,Lazio,2,4,1,1
+D,Cabal,Verona,2,3,1,1
+D,Conti,Sampdoria,1,3,1,1
+D,Tonelli,Empoli,1,1,1,1
+D,Radu,Lazio,1,2,1,1
+D,Paletta,Monza,1,2,1,1
+D,Marchizza,Sassuolo,1,2,1,1
+D,Romagna,Sassuolo,1,1,1,1
+D,Magnani,Verona,1,3,1,1
+D,Ranieri L.,Fiorentina,1,1,1,1
+D,Gabbia,Milan,1,1,1,1
+D,Adopo,Torino,1,1,1,1
+D,Ferrer,Spezia,1,3,1,1
+D,Ruggeri,Atalanta,1,1,1,1
+D,Antov,Monza,1,1,1,1
+D,Amey,Bologna,1,1,1,1
+D,Ferrarini,Monza,1,1,1,1
+D,Kamenovic,Lazio,1,1,1,1
+D,Vina,Roma,1,3,1,1
+D,Zanoli,Napoli,1,3,1,1
+D,Zanotti,Inter,1,1,1,1
+D,Ruan,Sassuolo,1,3,1,1
+D,Motoc,Salernitana,1,1,1,1
+D,Cacace,Empoli,1,3,1,1
+D,Bayeye,Torino,1,1,1,1
+D,Ebosele,Udinese,1,2,1,1
+D,Buta,Udinese,1,1,1,1
+D,Ndiaye,Cremonese,1,1,1,1
+D,Abankwah,Udinese,1,1,1,1
+D,Guessand A.,Udinese,1,1,1,1
+D,Sosa,Bologna,1,2,1,1
+D,Guarino,Empoli,1,1,1,1
+M,Milinkovic-Savic,Lazio,27,29,1,1
+M,Kvaratskhelia,Napoli,23,18,1,1
+M,Zielinski,Napoli,22,19,1,1
+M,Pellegrini Lo.,Roma,22,27,1,1
+M,Barella,Inter,22,20,1,1
+M,Pereyra,Udinese,21,18,1,1
+M,Malinovskyi,Atalanta,21,22,1,1
+M,Felipe Anderson,Lazio,20,19,1,1
+M,Zaccagni,Lazio,20,20,1,1
+M,Chiesa,Juventus,20,25,1,1
+M,Pasalic,Atalanta,20,22,1,1
+M,Luis Alberto,Lazio,20,18,1,1
+M,Calhanoglu,Inter,20,19,1,1
+M,Koopmeiners,Atalanta,20,15,1,1
+M,Vlasic,Torino,20,15,1,1
+M,Pogba,Juventus,19,24,1,1
+M,Barak,Fiorentina,19,22,1,1
+M,De Ketelaere,Milan,19,21,1,1
+M,Candreva,Salernitana,18,17,1,1
+M,Frattesi,Sassuolo,18,16,1,1
+M,Politano,Napoli,17,15,1,1
+M,Brozovic,Inter,16,15,1,1
+M,Bonaventura,Fiorentina,15,14,1,1
+M,Zaniolo,Roma,15,19,1,1
+M,Lobotka,Napoli,15,11,1,1
+M,Kostic,Juventus,15,15,1,1
+M,Bajrami,Empoli,15,18,1,1
+M,Bennacer,Milan,14,10,1,1
+M,Traore' Hj.,Sassuolo,14,18,1,1
+M,Zambo Anguissa,Napoli,14,11,1,1
+M,Tonali,Milan,14,16,1,1
+M,Strefezza,Lecce,14,13,1,1
+M,Lazovic,Verona,13,13,1,1
+M,Mkhitaryan,Inter,13,16,1,1
+M,Soriano,Bologna,13,12,1,1
+M,Wijnaldum,Roma,13,17,1,1
+M,Elmas,Napoli,13,11,1,1
+M,Diaz B.,Milan,13,11,1,1
+M,Paredes,Juventus,12,13,1,1
+M,Cuadrado,Juventus,12,15,1,1
+M,Cristante,Roma,12,9,1,1
+M,Orsolini,Bologna,12,15,1,1
+M,Tameze,Verona,12,14,1,1
+M,Messias,Milan,12,14,1,1
+M,Radonjic,Torino,12,7,1,1
+M,Samardzic,Udinese,12,8,1,1
+M,Sabiri,Sampdoria,12,15,1,1
+M,Locatelli,Juventus,11,14,1,1
+M,Mandragora,Fiorentina,11,9,1,1
+M,Sensi,Monza,11,12,1,1
+M,Djuricic,Sampdoria,11,13,1,1
+M,Lukic,Torino,11,13,1,1
+M,Sottil,Fiorentina,11,8,1,1
+M,Ikone',Fiorentina,11,14,1,1
+M,Ederson D.s.,Atalanta,11,13,1,1
+M,Lovric,Udinese,11,6,1,1
+M,Vilhena,Salernitana,11,8,1,1
+M,Verdi,Verona,10,13,1,1
+M,Pessina,Monza,10,13,1,1
+M,Maggiore,Salernitana,10,10,1,1
+M,Ilic,Verona,10,13,1,1
+M,Saponara,Fiorentina,9,11,1,1
+M,El Shaarawy,Roma,9,9,1,1
+M,Ndombele',Napoli,9,11,1,1
+M,Amrabat,Fiorentina,9,8,1,1
+M,Mckennie,Juventus,9,11,1,1
+M,Gyasi,Spezia,9,10,1,1
+M,Makengo,Udinese,9,8,1,1
+M,De Roon,Atalanta,8,7,1,1
+M,Bandinelli,Empoli,8,6,1,1
+M,Walace,Udinese,8,7,1,1
+M,Agudelo,Spezia,8,9,1,1
+M,Lopez M.,Sassuolo,8,9,1,1
+M,Miranchuk,Torino,8,8,1,1
+M,Pobega,Milan,8,9,1,1
+M,Kovalenko,Spezia,8,7,1,1
+M,Zalewski,Roma,8,7,1,1
+M,Ricci S.,Torino,8,7,1,1
+M,Coulibaly L.,Salernitana,8,6,1,1
+M,Miretti,Juventus,8,2,1,1
+M,Marcos Antonio,Lazio,8,10,1,1
+M,Thorstvedt,Sassuolo,8,9,1,1
+M,Colpani,Monza,8,4,1,1
+M,Rincon,Sampdoria,7,6,1,1
+M,Cataldi,Lazio,7,8,1,1
+M,Matic,Roma,7,7,1,1
+M,Meite',Cremonese,7,7,1,1
+M,Ascacibar,Cremonese,7,6,1,1
+M,Zurkowski,Fiorentina,7,8,1,1
+M,Schouten,Bologna,7,8,1,1
+M,Henderson L.,Empoli,7,8,1,1
+M,Dominguez,Bologna,7,8,1,1
+M,Saelemaekers,Milan,7,8,1,1
+M,Arslan,Udinese,7,6,1,1
+M,Hjulmand,Lecce,7,6,1,1
+M,Gonzalez J.,Lecce,7,2,1,1
+M,Grassi,Empoli,6,6,1,1
+M,Verre,Sampdoria,6,7,1,1
+M,Gagliardini,Inter,6,8,1,1
+M,Linetty,Torino,6,5,1,1
+M,Haas,Empoli,6,3,1,1
+M,Rabiot,Juventus,6,7,1,1
+M,Bourabia,Spezia,6,4,1,1
+M,Castrovilli,Fiorentina,6,9,1,1
+M,Villar,Sampdoria,6,7,1,1
+M,Maleh,Fiorentina,6,3,1,1
+M,Matheus Henrique,Sassuolo,6,6,1,1
+M,Vranckx,Milan,6,6,1,1
+M,Basic,Lazio,6,5,1,1
+M,Asllani,Inter,6,8,1,1
+M,Camara Ma.,Roma,6,7,1,1
+M,Krunic,Milan,5,7,1,1
+M,Vecino,Lazio,5,6,1,1
+M,Duncan,Fiorentina,5,7,1,1
+M,Barberis,Monza,5,7,1,1
+M,Miguel Veloso,Verona,5,6,1,1
+M,Valoti,Monza,5,5,1,1
+M,Ekdal,Spezia,5,7,1,1
+M,Vieira,Sampdoria,5,4,1,1
+M,Winks,Sampdoria,5,6,1,1
+M,Marin,Empoli,5,7,1,1
+M,Bohinen,Salernitana,5,7,1,1
+M,Milanese,Cremonese,5,7,1,1
+M,Adli,Milan,5,7,1,1
+M,Oudin,Lecce,5,5,1,1
+M,Molina S.,Monza,4,4,1,1
+M,Kastanos,Salernitana,4,5,1,1
+M,Escalante,Cremonese,4,4,1,1
+M,Aebischer,Bologna,4,4,1,1
+M,Terracciano F.,Verona,4,1,1,1
+M,Baldanzi,Empoli,4,1,1,1
+M,Pickel,Cremonese,4,4,1,1
+M,Listkowski,Lecce,4,1,1,1
+M,Bistrovic,Lecce,4,5,1,1
+M,Hrustic,Verona,4,4,1,1
+M,Moro N.,Bologna,4,5,1,1
+M,Benassi,Fiorentina,3,3,1,1
+M,Baez,Cremonese,3,4,1,1
+M,Leris,Sampdoria,3,3,1,1
+M,Gaetano,Napoli,3,4,1,1
+M,Hongla,Verona,3,3,1,1
+M,Harroui,Sassuolo,3,2,1,1
+M,Ferguson,Bologna,3,5,1,1
+M,Blin,Lecce,3,2,1,1
+M,Ranocchia F.,Monza,3,2,1,1
+M,D'alessandro,Monza,2,1,1,1
+M,Machin,Monza,2,4,1,1
+M,Vignato,Bologna,2,3,1,1
+M,Rovella,Monza,2,3,1,1
+M,Fagioli,Juventus,2,3,1,1
+M,Demme,Napoli,2,4,1,1
+M,Askildsen,Lecce,2,3,1,1
+M,Akpa Akpro,Empoli,2,2,1,1
+M,Ceide,Sassuolo,2,2,1,1
+M,Castagnetti,Cremonese,2,4,1,1
+M,Helgason,Lecce,2,1,1,1
+M,Ciurria,Monza,2,3,1,1
+M,Ilkhan,Torino,2,3,1,1
+M,Ellertsson,Spezia,2,1,1,1
+M,Capezzi,Salernitana,1,1,1,1
+M,Jajalo,Udinese,1,3,1,1
+M,Bakayoko,Milan,1,2,1,1
+M,Scozzarella,Monza,1,1,1,1
+M,Obiang,Sassuolo,1,2,1,1
+M,Maldini,Spezia,1,2,1,1
+M,Darboe,Roma,1,1,1,1
+M,Bove,Roma,1,1,1,1
+M,Urbanski,Bologna,1,1,1,1
+M,Bertini,Lazio,1,1,1,1
+M,Cortinovis,Verona,1,2,1,1
+M,Romero L.,Lazio,1,2,1,1
+M,Bianco,Fiorentina,1,1,1,1
+M,Yepes,Sampdoria,1,3,1,1
+M,Sher,Spezia,1,1,1,1
+M,Nguiamba,Spezia,1,1,1,1
+M,Volpato,Roma,1,1,1,1
+M,Praszelik,Verona,1,1,1,1
+M,Trimboli,Sampdoria,1,1,1,1
+M,Pafundi,Udinese,1,1,1,1
+M,Bjorkengren,Lecce,1,1,1,1
+M,Vignato S.,Monza,1,1,1,1
+M,Bondo,Monza,1,1,1,1
+M,Samek,Lecce,1,1,1,1
+M,Zerbin,Napoli,1,1,1,1
+M,Degli Innocenti,Empoli,1,1,1,1
+M,Fazzini,Empoli,1,1,1,1
+M,Acella,Cremonese,1,1,1,1
+M,Tripi,Roma,1,1,1,1
+M,Garbett,Torino,1,1,1,1
+ST,Vlahovic,Juventus,40,40,1,1
+ST,Immobile,Lazio,38,42,1,1
+ST,Martinez L.,Inter,35,34,1,1
+ST,Lukaku,Inter,34,39,1,1
+ST,Dybala,Roma,32,29,1,1
+ST,Arnautovic,Bologna,32,27,1,1
+ST,Rafael Leao,Milan,32,31,1,1
+ST,Giroud,Milan,31,28,1,1
+ST,Osimhen,Napoli,31,35,1,1
+ST,Abraham,Roma,30,33,1,1
+ST,Berardi,Sassuolo,29,35,1,1
+ST,Beto,Udinese,28,24,1,1
+ST,Zapata D.,Atalanta,27,32,1,1
+ST,Di Maria,Juventus,25,26,1,1
+ST,Deulofeu,Udinese,23,24,1,1
+ST,Muriel,Atalanta,22,26,1,1
+ST,Caprari,Monza,22,26,1,1
+ST,Milik,Juventus,22,21,1,1
+ST,Sanabria,Torino,20,21,1,1
+ST,Pinamonti,Sassuolo,20,23,1,1
+ST,Simeone,Napoli,20,25,1,1
+ST,Jovic,Fiorentina,20,24,1,1
+ST,Pedro,Lazio,20,19,1,1
+ST,Henry,Verona,20,18,1,1
+ST,Dia,Salernitana,20,17,1,1
+ST,Correa,Inter,19,16,1,1
+ST,Caputo,Sampdoria,19,21,1,1
+ST,Raspadori,Napoli,18,20,1,1
+ST,Dzeko,Inter,17,16,1,1
+ST,Lammers,Empoli,17,15,1,1
+ST,Gabbiadini,Sampdoria,16,15,1,1
+ST,Barrow,Bologna,16,17,1,1
+ST,Piatek,Salernitana,16,15,1,1
+ST,Gonzalez N.,Fiorentina,16,20,1,1
+ST,Lozano,Napoli,16,18,1,1
+ST,Lookman,Atalanta,16,13,1,1
+ST,Nzola,Spezia,16,14,1,1
+ST,Belotti,Roma,15,16,1,1
+ST,Bonazzoli,Salernitana,15,14,1,1
+ST,Okereke,Cremonese,15,13,1,1
+ST,Cabral,Fiorentina,15,19,1,1
+ST,Dessers,Cremonese,15,17,1,1
+ST,Lauriente',Sassuolo,15,14,1,1
+ST,Rebic,Milan,14,14,1,1
+ST,Verde,Spezia,14,18,1,1
+ST,Destro,Empoli,14,18,1,1
+ST,Origi,Milan,14,17,1,1
+ST,Satriano,Empoli,14,14,1,1
+ST,Ceesay,Lecce,13,10,1,1
+ST,Botheim,Salernitana,13,13,1,1
+ST,Petagna,Monza,12,15,1,1
+ST,Kouame',Fiorentina,12,9,1,1
+ST,Success,Udinese,12,13,1,1
+ST,Mota,Monza,12,10,1,1
+ST,Lasagna,Verona,11,11,1,1
+ST,Kean,Juventus,11,15,1,1
+ST,Alvarez A.,Sassuolo,11,14,1,1
+ST,Di Francesco F.,Lecce,10,12,1,1
+ST,Nestorovski,Udinese,10,11,1,1
+ST,Pjaca,Empoli,10,9,1,1
+ST,Pellegri,Torino,10,12,1,1
+ST,Ibrahimovic,Milan,10,13,1,1
+ST,Boga,Atalanta,10,13,1,1
+ST,Zanimacchia,Cremonese,10,9,1,1
+ST,Piccoli,Verona,10,13,1,1
+ST,Banda,Lecce,10,5,1,1
+ST,Hojlund,Atalanta,10,8,1,1
+ST,Quagliarella,Sampdoria,9,10,1,1
+ST,Shomurodov,Roma,9,12,1,1
+ST,Djuric,Verona,9,11,1,1
+ST,Strelec,Spezia,7,6,1,1
+ST,Buonaiuto,Cremonese,7,7,1,1
+ST,Defrel,Sassuolo,6,8,1,1
+ST,Colombo,Lecce,6,7,1,1
+ST,Zirkzee,Bologna,6,7,1,1
+ST,Afena-Gyan,Cremonese,6,8,1,1
+ST,Tsadjout,Cremonese,6,8,1,1
+ST,Sansone,Bologna,5,6,1,1
+ST,Cambiaghi,Empoli,5,6,1,1
+ST,Kallon,Verona,5,2,1,1
+ST,Cancellieri,Lazio,5,7,1,1
+ST,Seck,Torino,5,3,1,1
+ST,Karamoh,Torino,4,4,1,1
+ST,Ribery,Salernitana,4,5,1,1
+ST,Pussetto,Sampdoria,4,5,1,1
+ST,Rodriguez P.,Lecce,3,2,1,1
+ST,Gytkjaer,Monza,3,4,1,1
+ST,De Luca,Sampdoria,2,4,1,1
+ST,Valencia D.,Salernitana,2,2,1,1
+ST,Ciofani D.,Cremonese,1,1,1,1
+ST,Edera,Torino,1,2,1,1
+ST,Oddei,Sassuolo,1,1,1,1
+ST,Raimondo,Bologna,1,1,1,1
+ST,Kristoffersen,Salernitana,1,1,1,1
+ST,Kaio Jorge,Juventus,1,1,1,1
+ST,Antiste,Sassuolo,1,3,1,1
+ST,Soule',Juventus,1,1,1,1
+ST,Lazetic,Milan,1,1,1,1
+ST,Voelkerling Persson,Lecce,1,1,1,1
+ST,Sanca,Spezia,1,1,1,1

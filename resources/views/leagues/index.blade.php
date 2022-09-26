@@ -123,13 +123,14 @@
                     <x-table.td>{{ $leagues_guest->budget }}</x-table.td>
                     
                     <x-table.td class="flex justify-center">
-
+                        {{-- {{ dd(auth()->user()->userSetting); }} --}}
                         <div class="flex items-center justify-end pr-6">
                             @if($receivedInvitation->trashed() || $leagues_guest->trashed())
                             <x-icon-btn class="opacity-40 bg-gray-500">
                                 <i title="{{ __('You cannot select this league') }}" class="fa-solid fa-check"></i>
                             </x-icon-btn>
-                            @elseif($leagues_guest->id != auth()->user()->userSetting->league_id)
+                            
+                            @elseif($leagues_guest->id !== auth()->user()->userSetting->league_id)
                             <form action="{{ route('leagues.select', $receivedInvitation->league_id) }}" method="POST">
                                 @csrf
                                 @method('PUT') 

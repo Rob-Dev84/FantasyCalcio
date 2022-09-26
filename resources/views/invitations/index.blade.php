@@ -14,7 +14,7 @@
     {{-- I want to check if userSetting->league_id === --}}
 
     {{-- {{ dd(auth()->user()->leagues->contains(Auth::user()->userSetting->league_id)) }} --}}
-    @if (auth()->user()->userSetting->league_id === NULL)
+    @if (auth()->user()->userSetting && auth()->user()->userSetting->league_id === NULL)
         <div class="p-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -29,7 +29,7 @@
                 </div>
             </div>
         </div>
-    @elseif(!auth()->user()->leagues->contains(auth()->user()->userSetting->league_id))
+    @elseif(auth()->user()->userSetting && !auth()->user()->leagues->contains(auth()->user()->userSetting->league_id))
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -49,7 +49,7 @@
     
     
 
-    @if (auth()->user()->leagues->contains(auth()->user()->userSetting->league_id)) {{-- Here we check if 'id_user' form the league table matches the 'user_id' from userSetting table --}}
+    @if (auth()->user()->userSetting && auth()->user()->leagues->contains(auth()->user()->userSetting->league_id)) {{-- Here we check if 'id_user' form the league table matches the 'user_id' from userSetting table --}}
     
         <div class="pt-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -57,7 +57,7 @@
                     <div class="p-6 bg-white border-b border-gray-200 flex items-center justify-between">                 
                         <div>
                         {{ __('As League Admin, you invited') }} {{ $sentInvitations->count() }} {{ Str::plural('friend', $sentInvitations->count()) }} {{ __(' to join the league: ') }} 
-                        <b> {{ $leagueOwnedBy->name }} </b> 
+                        <b> {{ $league }} </b> 
                         {{-- I get the name by quering the league table on invitation controller
                         I'm sure we can achieve it via relationships --}}
                         </div>

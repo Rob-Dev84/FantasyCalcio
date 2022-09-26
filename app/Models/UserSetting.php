@@ -25,9 +25,19 @@ class UserSetting extends Model
     return $this->belongsTo(League::class);
     }
 
-    public function team()
-    {
-    return $this->hasOneThrough(Team::class, League::class);
-    }
+    // public function team()
+    // {
+    // return $this->hasOneThrough(Team::class, League::class);
+    // }
+
+    // public function team()
+    // {
+    // return $this->belongsTo(Team::class);
+    // }
+
+    // public function team()
+    // {
+    //     return $this->hasOne(Team::class, 'league_id');
+    // }
 
 }

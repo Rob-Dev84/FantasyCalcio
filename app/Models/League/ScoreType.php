@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class ScoreType extends Model
 {
     use HasFactory;
+
+    public $timestamps = false;
+
+    
 }

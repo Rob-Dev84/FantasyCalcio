@@ -8,6 +8,8 @@ module.exports = {
         './resources/views/**/*.blade.php',
     ],
 
+    darkMode: false, //chenage for 'media' or 'class'
+
     theme: {
         extend: {
             fontFamily: {

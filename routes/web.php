@@ -3,11 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\League\LeagueController;
+use App\Http\Controllers\Market\MarketController;
 use App\Http\Controllers\InvitationReceivedController;
 use App\Http\Controllers\League\LeagueTrashController;
 use App\Http\Controllers\League\LeagueSelectController;
-use App\Http\Controllers\Invitation\InvitationTrashController;
 use App\Http\Controllers\Invitation\InvitationController;
+use App\Http\Controllers\Invitation\InvitationTrashController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Group all routes in this application with middleware 
+//Group all routes in this application with middleware
+
+//TODO - make route for not verified users
+
 Route::group(['middleware' => 'auth', 'verified'], function() {
 
     Route::get('/dashboard', function () {//This will go to the controller
@@ -38,6 +42,14 @@ Route::group(['middleware' => 'auth', 'verified'], function() {
     Route::get('/market', function () {//This will go to the controller
         return view('market');
     })->name('market');
+
+    Route::controller(MarketController::class)->group(function () {
+
+            Route::get('/markets/{league:name}/{team:name}', 'index')->name('markets');
+            // Route::post('/markets/{league:name}/search', 'search');
+            Route::post('/markets/{league:name}/{team:name}/{player}', 'buy')->name('markets.buy');//form to buy a player
+            Route::delete('/markets/{league:name}/{team:name}/{player}/sell', 'sell')->name('markets.sell');
+        });
 
     Route::get('/roster', function () {//This will go to the controller
         return view('roster');

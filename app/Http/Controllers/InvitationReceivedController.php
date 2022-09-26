@@ -7,7 +7,6 @@ use App\Models\League;
 use App\Models\Invitation;
 use App\Models\UserSetting;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Invitations\AcceptInvitation;
 
@@ -76,11 +75,11 @@ class InvitationReceivedController extends Controller
     
     public function accept(Request $request, Invitation $invitation)
     {
-        
+        // dd($request->user()->userSetting());
         //Before accept check policy
         $this->authorize('userOwnedInvitation', $invitation);
 
-        $accepInvitation = Invitation::where('user_id', Auth::user()->id)
+        $accepInvitation = Invitation::where('user_id', auth()->user()->id)
                                     ->where('id', $invitation->id)
                                     ->first()
                                     ->update([
@@ -93,13 +92,13 @@ class InvitationReceivedController extends Controller
         //     'confirmed' => true,
         // ]);
 
-        $league_id_selected = UserSetting::where('user_id', Auth::user()->id)->first();
+        $league_id_selected = UserSetting::where('user_id', auth()->user()->id)->first();
 
         //if user doesn't have any league selected, CREATE row userSetting table
         if (!$league_id_selected) {
 
-            $request->user()->first()->userSetting()->create([
-                'user_id' => Auth::user()->id,
+            $request->user()->userSetting()->create([
+                'user_id' => auth()->user()->id,
                 'league_id' => $invitation->league_id,
             ]);
         }
@@ -136,7 +135,7 @@ class InvitationReceivedController extends Controller
         //Before reject check policy
         $this->authorize('userOwnedInvitation', $invitation);
 
-        Invitation::where('user_id', Auth::user()->id)
+        Invitation::where('user_id', auth()->user()->id)
                                 ->where('id', $invitation->id)
                                 ->first()
                                 ->update([
