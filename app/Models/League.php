@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use App\Models\League;
+use App\Models\Market\Market;
 use App\Models\League\ScoreType;
 use App\Models\League\LeagueType;
 use App\Models\League\MarketType;
@@ -89,6 +90,18 @@ class League extends Model
     {
         return $this->hasMany(Team::class);
     }
+
+    // public function rosters()
+    // {
+    //     return $this->hasManyThrough(Team::class, Market::class, 'team_id', 'league_id', 'id', 'player_id');
+    // }
+
+    public function rosters($league)
+    {
+        return $this->hasManyThrough(Market::class, Team::class, 'id', 'team_id', 'id', 'league_id')->where('league_id', $league->id);
+    }
+
+   
 
 
     

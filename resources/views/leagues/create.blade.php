@@ -28,9 +28,9 @@
                     <!-- Validation Errors -->
                     <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-                    <form method="POST" action="{{ route('league') }}">
+                    <form method="POST" action="{{ route('leagues.store') }}">
                         @csrf
-
+                        {{-- @method('POST') --}}
                         <!-- League Name -->
                         <div>
                             <x-label for="name" :value="__('League Name')" />

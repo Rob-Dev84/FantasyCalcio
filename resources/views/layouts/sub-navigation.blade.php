@@ -206,14 +206,14 @@
 
                 {{-- //TODO: NOTE: - Dugbar shows me duplicated query, but I'll appeaired when user hasn't selected the league (good compromise)  --}}
                     
-                {{ (auth()->user()->userSetting || auth()->user()->userSetting->league_id === NULL) 
+                {{ (auth()->user()->userSetting && auth()->user()->userSetting->league_id === NULL) 
                         ? 'Select League' 
                         : (auth()->user()->userSetting->league->name) ; }}
   
                 </span>
                 <span>
 
-                    
+
           
                 <i class="fa-solid fa-shirt"></i>
                 {{ __('Team: ') }}
@@ -245,7 +245,7 @@
                 {{ __('Leagues not found') }}
             </x-responsive-nav-link>
             <hr>
-            <x-responsive-nav-link :href="route('market')" :active="request()->routeIs('market')">
+            <x-responsive-nav-link :href="route('leagues.create')" :active="request()->routeIs('leagues.create')">
                 {{ __('Create new league') }}
             </x-responsive-nav-link>
             <hr>

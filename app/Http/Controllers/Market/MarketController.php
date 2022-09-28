@@ -118,6 +118,7 @@ class MarketController extends Controller
         $market = $request->user()->markets()->create([
             'team_id' => $team->id,
             'player_id' => $player->id,
+            'expense' => $player->current_value,
         ]);
 
         //Subtract the player value to the team budget 

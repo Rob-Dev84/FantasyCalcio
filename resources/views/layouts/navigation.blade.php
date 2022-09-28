@@ -14,43 +14,44 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         <i class="fa-solid fa-chart-simple"></i>
-                        {{ __('Dashboard') }}
+                        <div class="ml-1">{{ __('Dashboard') }}</div>
+                        
                     </x-nav-link>
 
                     @if (!auth()->user()->UserSetting || auth()->user()->UserSetting->league_id === NULL || !auth()->user()->team)
                         <x-nav-link class="opacity-30" title="You need to select a league">
                             <i class="fa-solid fa-shop"></i>
                             {{-- <i class="fa-solid fa-shop-lock"></i> --}}
-                            {{ __('Market') }}
+                            <div class="ml-1">{{ __('Market') }}</div>
                         </x-nav-link>
                     @else
-                        <x-nav-link :href="route('markets', [auth()->user()->UserSetting->league, auth()->user()->team])" :active="request()->routeIs('market')">
+                        <x-nav-link :href="route('markets', [auth()->user()->UserSetting->league, auth()->user()->team])" :active="request()->routeIs('markets')">
                             <i class="fa-solid fa-shop"></i>
                             {{-- <i class="fa-solid fa-shop-lock"></i> --}}
-                            {{ __('Market') }}
+                            <div class="ml-1">{{ __('Market') }}</div>
                         </x-nav-link>
                     @endif
 
-                    
+                    {{-- {{ dd(auth()->user()->userSetting->league) }} --}}
 
-                    <x-nav-link :href="route('roster')" :active="request()->routeIs('roster')">
+                    <x-nav-link :href="route('rosters', [auth()->user()->userSetting->league])" :active="request()->routeIs('rosters')">
                         <i class="fa-solid fa-people-group"></i>
-                        {{ __('Roster') }}
+                        <div class="ml-1">{{ __('Rosters') }}</div>
                     </x-nav-link>
 
                     <x-nav-link :href="route('lineup')" :active="request()->routeIs('lineup')">
                         <i class="fa-solid fa-clipboard"></i>
-                        {{ __('Line up') }}
+                        <div class="ml-1">{{ __('Line up') }}</div>
                     </x-nav-link>
 
                     <x-nav-link :href="route('matches')" :active="request()->routeIs('matches')">
                         <i class="fa-regular fa-calendar"></i>
-                        {{ __('Matches') }}
+                        <div class="ml-1">{{ __('Matches') }}</div>
                     </x-nav-link>
 
                     <x-nav-link :href="route('standings')" :active="request()->routeIs('standings')">
                         <i class="fa-solid fa-chart-bar"></i>
-                        {{ __('Standings') }}
+                        <div class="ml-1">{{ __('Standings') }}</div>                        
                     </x-nav-link>
                 </div>
             </div>
@@ -106,13 +107,23 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            
-            <x-responsive-nav-link :href="route('market')" :active="request()->routeIs('market')">
-                {{ __('Market') }}
-            </x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('roster')" :active="request()->routeIs('roster')">
-                {{ __('Roster') }}
+            @if (!auth()->user()->UserSetting || auth()->user()->UserSetting->league_id === NULL || !auth()->user()->team)
+                <x-responsive-nav-link class="opacity-30" title="You need to select a league">
+                    <i class="fa-solid fa-shop"></i>
+                    {{-- <i class="fa-solid fa-shop-lock"></i> --}}
+                    {{ __('Market') }}
+                </x-responsive-nav-link>
+            @else
+                <x-responsive-nav-link :href="route('markets', [auth()->user()->UserSetting->league, auth()->user()->team])" :active="request()->routeIs('markets')">
+                    {{ __('Market') }}
+                </x-responsive-nav-link>
+            @endif
+            
+            
+
+            <x-responsive-nav-link :href="route('rosters', [auth()->user()->userSetting->league])" :active="request()->routeIs('rosters')">
+                {{ __('Rosters') }}
             </x-responsive-nav-link>
 
             <x-responsive-nav-link :href="route('lineup')" :active="request()->routeIs('lineup')">

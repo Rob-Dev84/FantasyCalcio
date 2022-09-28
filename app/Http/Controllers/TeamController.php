@@ -7,7 +7,6 @@ use App\Models\League;
 use App\Models\UserSetting;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Auth;
 
 class TeamController extends Controller
 {
@@ -19,10 +18,10 @@ class TeamController extends Controller
     public function index()
     {
         //Get user league_id selected
-        $league = UserSetting::where('user_id', Auth::user()->id)->first();
+        $league = UserSetting::where('user_id', auth()->user()->id)->first();
 
         //Get user team per league selected
-        $team = Team::where('user_id', Auth::user()->id)->where('league_id', $league->league_id)->first();
+        $team = Team::where('user_id', auth()->user()->id)->where('league_id', $league->league_id)->first();
 
         return view('team.index', [
             'team' => $team 
@@ -103,7 +102,7 @@ class TeamController extends Controller
      */
     public function edit(Team $team)
     {
-        if (Auth::user()->id === $team->user_id) {
+        if (auth()->user()->id === $team->user_id) {
             return view('team.edit', [
                 'team' => $team
             ]);
@@ -129,7 +128,7 @@ class TeamController extends Controller
         $this->validate($request, [
             'name' => ['required', //Ignore unique teame when user update name and Keep Unique team name per league 
                         Rule::unique('teams')->ignore($team)
-                                             ->where('user_id', Auth::user()->id, 'league_id', Auth::user()->userSetting->league_id),    
+                                             ->where('user_id', auth()->user()->id, 'league_id', auth()->user()->userSetting->league_id),    
                         'min:3|max:25'],
             'stadium' => 'required|min:3|max:25'
         ]);

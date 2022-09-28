@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\League\LeagueController;
 use App\Http\Controllers\Market\MarketController;
+use App\Http\Controllers\Roster\RosterController;
 use App\Http\Controllers\InvitationReceivedController;
 use App\Http\Controllers\League\LeagueTrashController;
 use App\Http\Controllers\League\LeagueSelectController;
@@ -39,38 +40,12 @@ Route::group(['middleware' => 'auth', 'verified'], function() {
         return view('dashboard/dashboard');
     })->name('dashboard');
 
-    Route::get('/market', function () {//This will go to the controller
-        return view('market');
-    })->name('market');
 
-    Route::controller(MarketController::class)->group(function () {
+    
 
-            Route::get('/markets/{league:name}/{team:name}', 'index')->name('markets');
-            // Route::post('/markets/{league:name}/search', 'search');
-            Route::post('/markets/{league:name}/{team:name}/{player}', 'buy')->name('markets.buy');//form to buy a player
-            Route::delete('/markets/{league:name}/{team:name}/{player}/sell', 'sell')->name('markets.sell');
-        });
-
-    Route::get('/roster', function () {//This will go to the controller
-        return view('roster');
-    })->name('roster');
-
-    Route::get('/lineup', function () {//This will go to the controller
-        return view('lineup');
-    })->name('lineup');
-
-    Route::get('/matches', function () {//This will go to the controller
-        return view('matches');
-    })->name('matches');
-
-    Route::get('/standings', function () {//This will go to the controller
-        return view('standings');
-    })->name('standings');
-
-    Route::get('/league', function () {//This will go to the controller
-        return view('league');
-    })->name('league');
-
+    // Route::get('/league', function () {//This will go to the controller
+    //     return view('league');
+    // })->name('league');
 
 
     //This is new Laravel 9 feature: I used [LeagueController::class] only once, when we groups ruotes
@@ -83,7 +58,7 @@ Route::group(['middleware' => 'auth', 'verified'], function() {
         Route::get('/league/{league:name}/edit', 'edit')->name('league.edit');
         Route::put('/league/{league}/update', 'update')->name('league.update');
 
-        Route::post('/league', 'store');
+        Route::post('/leagues/create', 'store')->name('leagues.store');
         Route::delete('/leagues/{league}/softDelete', 'softDelete')->name('leagues.softDelete');
     });
 
@@ -127,13 +102,7 @@ Route::group(['middleware' => 'auth', 'verified'], function() {
         Route::put('/invitation/{invitation}/decline', 'decline')->name('invitation.decline');
 
     });
-
-    // Route::controller(TrashController::class)->middleware(['auth', 'verified'])->group(function () {
-
-    //     Route::get('/invitations/trash', 'index')->name('invitations.trash');//trash page
-    //     Route::put('/invitation/trash/{invitation}/restore', 'restore')->name('invitation.restore')->withTrashed();
-    //     Route::delete('/invitation/trash/{invitation}/destroy', 'forceDelete')->name('invitation.forceDelete')->withTrashed();
-    // });
+    
 
     Route::controller(InvitationTrashController::class)->group(function () {
 
@@ -141,6 +110,31 @@ Route::group(['middleware' => 'auth', 'verified'], function() {
         Route::put('/invitation/trash/{invitation}/restore', 'restore')->name('invitation.restore')->withTrashed();
         Route::delete('/invitation/trash/{invitation}/destroy', 'forceDelete')->name('invitation.forceDelete')->withTrashed();
     });
+
+    Route::controller(MarketController::class)->group(function () {
+
+        Route::get('/markets/{league:name}/{team:name}', 'index')->name('markets');
+        // Route::post('/markets/{league:name}/search', 'search');
+        Route::post('/markets/{league:name}/{team:name}/{player}', 'buy')->name('markets.buy');//form to buy a player
+        Route::delete('/markets/{league:name}/{team:name}/{player}/sell', 'sell')->name('markets.sell');
+        
+    });
+
+    Route::controller(RosterController::class)->group(function () {
+        Route::get('/rosters/{league:name}', 'index')->name('rosters');
+    });
+
+    Route::get('/lineup', function () {//This will go to the controller
+        return view('lineup');
+    })->name('lineup');
+
+    Route::get('/matches', function () {//This will go to the controller
+        return view('matches');
+    })->name('matches');
+
+    Route::get('/standings', function () {//This will go to the controller
+        return view('standings');
+    })->name('standings');
 
 });
 
