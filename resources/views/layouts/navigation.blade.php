@@ -1,3 +1,4 @@
+{{-- //FIXME - There are 2 duplicated queries here --}}
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -34,15 +35,24 @@
 
                     {{-- {{ dd(auth()->user()->userSetting->league) }} --}}
 
+                    
                     <x-nav-link :href="route('rosters', [auth()->user()->userSetting->league])" :active="request()->routeIs('rosters')">
                         <i class="fa-solid fa-people-group"></i>
                         <div class="ml-1">{{ __('Rosters') }}</div>
                     </x-nav-link>
+                
 
-                    <x-nav-link :href="route('lineup')" :active="request()->routeIs('lineup')">
-                        <i class="fa-solid fa-clipboard"></i>
-                        <div class="ml-1">{{ __('Line up') }}</div>
-                    </x-nav-link>
+                    @if (!auth()->user()->UserSetting || auth()->user()->UserSetting->league_id === NULL || !auth()->user()->team)
+                        <x-nav-link class="opacity-30" title="You need to select a league">
+                            <i class="fa-solid fa-clipboard"></i>
+                            <div class="ml-1">{{ __('Line up') }}</div>
+                        </x-nav-link>
+                    @else
+                        <x-nav-link :href="route('lineup', [auth()->user()->UserSetting->league, auth()->user()->team])" :active="request()->routeIs('lineup')">
+                            <i class="fa-solid fa-clipboard"></i>
+                            <div class="ml-1">{{ __('Line up') }}</div>
+                        </x-nav-link>
+                    @endif
 
                     <x-nav-link :href="route('matches')" :active="request()->routeIs('matches')">
                         <i class="fa-regular fa-calendar"></i>
@@ -126,7 +136,7 @@
                 {{ __('Rosters') }}
             </x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('lineup')" :active="request()->routeIs('lineup')">
+            <x-responsive-nav-link :href="route('lineup', [auth()->user()->UserSetting->league, auth()->user()->team])" :active="request()->routeIs('lineup')">
                 {{ __('Lineup') }}
             </x-responsive-nav-link>
 

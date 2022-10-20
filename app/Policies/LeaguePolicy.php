@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\User;
 use App\Models\League;
 use App\Models\Invitation;
+use App\Models\UserSetting;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class LeaguePolicy
@@ -28,6 +29,24 @@ class LeaguePolicy
             return  $user->id === $invitation->user_id;
         } else {//user league admin
             return $user->id === $league->user_id;
+        }
+    
+    }
+
+    public function selectedLeague(User $user, League $league)
+    {   
+        //Check league id selected on userSettings table
+        $selectedLeague = UserSetting::where('league_id', $league->id)
+                                ->where('user_id', $user->id)
+                                ->first();
+
+        if ($selectedLeague) {//if true, policy is checked
+
+            return $user->id === $selectedLeague->user_id;
+
+        } else {//If false, don't check and retum false anyway
+            
+            return false;
         }
     
     }

@@ -30,6 +30,9 @@ class RosterController extends Controller
                     ->select('players.*', 'teams.*', 'markets.*')
                     ->orderBy('players.id')
                     ->get();
+
+        //FIXME - play around this relationship. I woul like to get rid of the ugly query above
+        // $players = auth()->user()->markets()->with(['player'])->get();
         
         //Alternative code (problem here is the loop, thah stops running after first iteration)
         

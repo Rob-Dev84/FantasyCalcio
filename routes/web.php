@@ -3,11 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\League\LeagueController;
+use App\Http\Controllers\Lineup\LineupController;
 use App\Http\Controllers\Market\MarketController;
 use App\Http\Controllers\Roster\RosterController;
 use App\Http\Controllers\InvitationReceivedController;
 use App\Http\Controllers\League\LeagueTrashController;
 use App\Http\Controllers\League\LeagueSelectController;
+use App\Http\Controllers\Lineup\LineupModuleController;
 use App\Http\Controllers\Invitation\InvitationController;
 use App\Http\Controllers\Invitation\InvitationTrashController;
 
@@ -124,9 +126,26 @@ Route::group(['middleware' => 'auth', 'verified'], function() {
         Route::get('/rosters/{league:name}', 'index')->name('rosters');
     });
 
-    Route::get('/lineup', function () {//This will go to the controller
-        return view('lineup');
-    })->name('lineup');
+    Route::controller(LineupController::class)->group(function () {
+        Route::get('/lineups/{league:name}/all', 'index')->name('lineups');//show all the lineups (latest per date)
+
+        // Route::get('/lineups/{league:name}/{currentFixture}/all', 'index')->name('lineups');//show all the lineups (latest per date)
+        // Route::get('/lineups/{league:name}/{fixture}/all', 'edit')->name('lineups.edit');//show all the lineups (per fixture selected)
+
+        //TODO - Create a middleware that checks current timestamp between 'start'/'end' curretn fixture
+        Route::get('/lineup/{league:name}/{team:name}', 'create')->name('lineup');//lineup single team
+        Route::post('/lineup/{league:name}/{team:name}/{fixture}/{player}/pitch', 'pitch')->name('lineup.pitch');
+        Route::post('/lineup/{league:name}/{team:name}/{fixture}/{player}/bench', 'bench')->name('lineup.bench');
+        Route::delete('/lineup/{league:name}/{team:name}/{fixture}/{player}/undo', 'undo')->name('lineup.undo');
+    });
+
+    Route::controller(LineupModuleController::class)->group(function () {
+        Route::post('/lineup/module', 'store')->name('module.store');
+    });
+
+    // Route::get('/lineup', function () {//This will go to the controller
+    //     return view('lineup');
+    // })->name('lineup');
 
     Route::get('/matches', function () {//This will go to the controller
         return view('matches');

@@ -78,7 +78,7 @@ class MarketController extends Controller
         
         // $this->authorize('buyPlayer', $team);
 
-        //TODO - Tidy up these policies
+        //TODO - Tidy up these policies. lmost the same policy from LineupController. To refactor here
 
         abort_if(auth()->user()->userSetting->league_id !== $league->id, code: 403);//abort if user change league
         abort_if(auth()->user()->userSetting->user_id !== $team->user_id, code: 403);//abort if user change team

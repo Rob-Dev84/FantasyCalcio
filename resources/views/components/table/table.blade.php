@@ -2,7 +2,7 @@
     <thead class="bg-gray-200 border-b border-gray-300">
         <tr class="">
             @foreach ($headers as $header)
-                <th class="px-6 py-3 {{  $header['classes'] }}">{{ $header['name'] }}</th>
+                <th class="px-3 py-1 {{ $header['classes'] }}">{{ $header['name'] }}</th>
             @endforeach
             
         </tr>
@@ -12,4 +12,4 @@
             {{ $slot }}
             
         </tbody>
-    </table>
+</table>

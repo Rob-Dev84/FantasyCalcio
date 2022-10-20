@@ -19,6 +19,6 @@
         ][$class] ?? '';    
 @endphp
 
-<td class="px-6 py-3 {{ $textAlignClass }} {{ $flexAlignClass }}">
+<td class="px-3 py-1 {{ $textAlignClass }} {{ $flexAlignClass }}">
     {{ $slot }} 
 </td>

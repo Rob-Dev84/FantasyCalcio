@@ -34,5 +34,15 @@ class Market extends Model
     //     return $this->hasOneThrough(Team::class, UserSetting::class, 'league_id', 'league_id');
     // }
 
+    // public function team()
+    // {
+    //     return $this->belongsTo(Team::class);
+    // }
+
+    // public function team()
+    // {
+    //     return $this->belongsTo(Team::class);
+    // }
+
 
 }

@@ -72,7 +72,7 @@
                     <x-table.td>{{ $player->initial_value }}</x-table.td>
                     
                     <x-table.td class="flex justify-center">
-                    
+                        
                        @if (!$team->markets->contains('player_id', $player->id))
                         <form x-data="{ btnDisabled: false }" @submit="btnDisabled = true" action="{{ route('markets.buy', [$league, $team, $player]) }}" method="POST">
                             @csrf

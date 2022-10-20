@@ -16,6 +16,11 @@ class TeamPolicy
         return $user->id === $team->user_id;
     }
 
+    public function checkTeam(User $user, Team $team)
+    {
+        return $user->id === $team->user_id;
+    }
+
     // public function softDelete(User $user, Team $team)
     // {   
     

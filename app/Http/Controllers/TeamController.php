@@ -67,6 +67,8 @@ class TeamController extends Controller
         //     die();
         // }
 
+        // dd(auth()->user()->userSetting->league_id);
+
         $league = League::where('id', auth()->user()->userSetting->league_id)->first();
 
         // dd($league);

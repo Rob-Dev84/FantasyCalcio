@@ -5,11 +5,13 @@ namespace App\Providers;
 use App\Models\Team;
 use App\Models\League;
 use App\Models\Invitation;
+// use App\Models\Lineup\Lineup;
 use App\Models\Market\Market;
 use App\Policies\LeaguePolicy;
 use App\Policies\MarketPolicy;
 use App\Policies\InvitationPolicy;
 use Illuminate\Support\Facades\Gate;
+// use App\Policies\Lineup\LineupPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -24,6 +26,7 @@ class AuthServiceProvider extends ServiceProvider
         League::class => LeaguePolicy::class,
         Invitation::class => InvitationPolicy::class,
         Market::class => MarketPolicy::class,
+        // Lineup::class => LineupPolicy::class,
     ];
 
     /**

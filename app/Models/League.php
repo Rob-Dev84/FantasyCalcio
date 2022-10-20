@@ -101,6 +101,11 @@ class League extends Model
         return $this->hasManyThrough(Market::class, Team::class, 'id', 'team_id', 'id', 'league_id')->where('league_id', $league->id);
     }
 
+    // public function team()
+    // {
+    //     return $this->belongsTo(team::class);
+    // }
+
    
 
 

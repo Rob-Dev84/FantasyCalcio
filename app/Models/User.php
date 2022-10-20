@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use App\Models\UserSetting;
 use App\Models\Market\Market;
+use App\Models\Market\Player;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -108,8 +109,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function markets()
     {
-        return $this->hasManyThrough(Market::class, Team::class);
+        return $this->hasManyThrough(Market::class, Team::class, 'id', 'team_id');
     }
-
+    
+    
     
 }

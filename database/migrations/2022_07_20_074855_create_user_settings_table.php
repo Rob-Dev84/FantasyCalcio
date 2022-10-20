@@ -19,7 +19,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');//If user deletes their account, the id users_setting will be deleted
             // $table->foreignId('league_id')->onDelete('cascade')->nullable();//on soft delete league the league_id here will be null
-            $table->foreignId('league_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('player_status')->nullable();
             $table->timestamps();
         });
     }

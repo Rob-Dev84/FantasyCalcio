@@ -2,15 +2,17 @@
 
 namespace App\Models\Market;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Lineup\Lineup;
+use App\Models\Market\Market;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Player extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        // 'name',
         'surname', 
         'role',
         'team',
@@ -26,6 +28,18 @@ class Player extends Model
     {
         return $this->belongsTo(Market::class);
     }
+
+    // public function market()
+    // {
+    //     return $this->belongsToMany(Market::class, 'player_id');
+    // }
+
+
+    // public function lineups()
+    // {
+    //     return 
+    //     $this->belongsTo(Lineup::class);
+    // }
 
 
 }
