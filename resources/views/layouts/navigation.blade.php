@@ -136,9 +136,17 @@
                 {{ __('Rosters') }}
             </x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('lineup', [auth()->user()->UserSetting->league, auth()->user()->team])" :active="request()->routeIs('lineup')">
-                {{ __('Lineup') }}
-            </x-responsive-nav-link>
+            @if (!auth()->user()->UserSetting || auth()->user()->UserSetting->league_id === NULL || !auth()->user()->team)
+                <x-responsive-nav-link class="opacity-30" title="You need to select a league">
+                    <i class="fa-solid fa-clipboard"></i>
+                    <div class="ml-1">{{ __('Line up') }}</div>
+                </x-responsive-nav-link>
+            @else
+                <x-responsive-nav-link :href="route('lineup', [auth()->user()->UserSetting->league, auth()->user()->team])" :active="request()->routeIs('lineup')">
+                    <i class="fa-solid fa-clipboard"></i>
+                    <div class="ml-1">{{ __('Line up') }}</div>
+                </x-responsive-nav-link>
+            @endif
 
             <x-responsive-nav-link :href="route('matches')" :active="request()->routeIs('matches')">
                 {{ __('Matches') }}

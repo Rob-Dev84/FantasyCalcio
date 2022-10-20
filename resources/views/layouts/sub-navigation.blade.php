@@ -83,7 +83,7 @@
                             <x-slot name="content">
                                 <!-- Team -->
                                 @if (auth()->user()->userSetting && auth()->user()->userSetting->league_id !== NULL)
-                                    <x-dropdown-link :href="route('team.create')" :active="request()->routeIs('team.create')">
+                                    <x-dropdown-link :href="route('team.create', [auth()->user()->UserSetting->league])" :active="request()->routeIs('team.create')">
                                         <i class="fa-solid fa-plus"></i>
                                         {{ __('Create Team') }}
                                     </x-dropdown-link>   
@@ -239,6 +239,7 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
+    {{-- //TODO - make sure the responsive links matches to regular onces --}}
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">

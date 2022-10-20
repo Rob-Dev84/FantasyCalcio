@@ -34,11 +34,7 @@ class LeagueController extends Controller
     public function index()
     {
       
-        //Show all the user Leagues avaible, with the get() method, per user_id 
         $leagues = League::where('user_id', auth()->user()->id)->with(['leagueType', 'marketType', 'scoreType'])->get();
-        // $leagues = League::with('user')->get();
-
-        // dd($leagues);
 
         $receivedInvitations = NULL;
         $leagues_guest = NULL;
@@ -46,6 +42,7 @@ class LeagueController extends Controller
         //Get all user Invitation received (use relationship un user model, to get the invitation table and the league name)
         $receivedInvitations = Invitation::withTrashed()->where('user_id', auth()->user()->id)->get();
 
+        //FIXME - The leagues where auser is invited is not lopping properly. 
         if ($receivedInvitations) {
             //Get league name (better a join between invitation/league table)
             foreach ($receivedInvitations as $receivedInvitation) {

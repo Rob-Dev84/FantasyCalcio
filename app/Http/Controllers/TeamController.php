@@ -6,7 +6,8 @@ use App\Models\Team;
 use App\Models\League;
 use App\Models\UserSetting;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
+use App\Http\Requests\Team\StoreTeamRequest;
+use App\Http\Requests\Team\UpdateTeamRequest;
 
 class TeamController extends Controller
 {
@@ -17,16 +18,7 @@ class TeamController extends Controller
      */
     public function index()
     {
-        //Get user league_id selected
-        $league = UserSetting::where('user_id', auth()->user()->id)->first();
-
-        //Get user team per league selected
-        $team = Team::where('user_id', auth()->user()->id)->where('league_id', $league->league_id)->first();
-
-        return view('team.index', [
-            'team' => $team 
-        ]);
-
+        return view('team.index');
     }
 
     /**
@@ -45,55 +37,20 @@ class TeamController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreTeamRequest $request, League $league)
     {
-        // dd($request->team()->user_id);
-        $this->validate($request, [
-            'name' => ['required', //Unique team name per league 
-                        Rule::unique('teams')->where('user_id', auth()->user()->id, 'league_id', auth()->user()->userSetting->league_id),    
-                        'min:3|max:25'],
-            'stadium' => 'required|min:3|max:25'
-        ]);
-
-        //Get user league_id selected
-        // $league = UserSetting::where('user_id', Auth::user()->id)->first();
-
-        //Get user team per league selected
-        // $team = team::where('user_id', Auth::user()->id)->where('league_id', $league->league_id)->first();
-
-        //Create new team if user hasn't created one yet
-        // if ($team) {
-        //     return back();
-        //     die();
-        // }
-
-        // dd(auth()->user()->userSetting->league_id);
-
-        $league = League::where('id', auth()->user()->userSetting->league_id)->first();
-
-        // dd($league);
 
         $request->user()->team()->create([
             'user_id' => auth()->user()->id,
-            'league_id' => auth()->user()->userSetting->league_id,
+            'league_id' => $league->id,
             'name' => $request->name,
             'stadium' => $request->stadium,
             'budget' => $league->budget,
         ]);
 
+        // $request->user()->team()->create($request->only('user_id', 'league_id', 'name', 'stadium', 'budget'));
+
         return redirect('team');
-
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -104,15 +61,12 @@ class TeamController extends Controller
      */
     public function edit(Team $team)
     {
-        if (auth()->user()->id === $team->user_id) {
-            return view('team.edit', [
-                'team' => $team
-            ]);
-        } else {
-            return back();
-        }
-        
-        
+
+        $this->authorize('checkTeam', $team);
+
+        return view('team.edit', [
+            'team' => $team
+        ]);
     }
 
     /**
@@ -122,23 +76,12 @@ class TeamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Team $team)
+
+    public function update(UpdateTeamRequest $request, Team $team)
     {
         $this->authorize('update', $team);
 
-        // Note: Better to use ignore($team), then the $team->id, to prevent SQL injection
-        $this->validate($request, [
-            'name' => ['required', //Ignore unique teame when user update name and Keep Unique team name per league 
-                        Rule::unique('teams')->ignore($team)
-                                             ->where('user_id', auth()->user()->id, 'league_id', auth()->user()->userSetting->league_id),    
-                        'min:3|max:25'],
-            'stadium' => 'required|min:3|max:25'
-        ]);
-
-        $request->user()->team()->first()->update([
-            'name' => $request->name,
-            'stadium' => $request->stadium,
-        ]);
+        $request->user()->team()->first()->update($request->only('name', 'stadium'));
 
         return redirect('team');
     }
@@ -152,8 +95,10 @@ class TeamController extends Controller
     public function destroy(Team $team)
     {
         $this->authorize('delete', $team);//delete is the method name we defined in TeamPolicy file. And we want to pass the $team object as well
+        
         $team->delete();
 
         return redirect('team');
     }
+
 }

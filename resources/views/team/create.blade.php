@@ -14,7 +14,7 @@
                 <!-- Validation Errors -->
                 <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-                <form method="POST" action="{{ route('team') }}">
+                <form method="POST" action="{{ route('team.store', [auth()->user()->UserSetting->league]) }}">
                     @csrf
 
                     <!-- Team Name -->

@@ -77,12 +77,12 @@ Route::group(['middleware' => 'auth', 'verified'], function() {
     Route::controller(TeamController::class)->group(function () {
         Route::get('/team', 'index')->name('team');
 
-        Route::get('/team/create', 'create')->name('team.create');//form to create a team
-        Route::post('/team', 'store');
+        Route::get('/team/{league:name}', 'create')->name('team.create');//form to create a team
+        Route::post('/team/{league:name}', 'store')->name('team.store');
 
-        Route::get('/team/{team}', 'edit')->name('team.edit');//form to modify team
-        Route::put('/team/{team}', 'update')->name('team.update');
-        Route::delete('/team/{team}', 'destroy')->name('team.destroy');
+        Route::get('/team/{team:name}/edit', 'edit')->name('team.edit');//form to modify team
+        Route::put('/team/{team:name}', 'update')->name('team.update');
+        Route::delete('/team/{team:name}', 'destroy')->name('team.destroy');
     });
 
     //League Admin

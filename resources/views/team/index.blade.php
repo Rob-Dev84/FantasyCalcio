@@ -27,49 +27,49 @@
                     <ul>
                         <li class="flex items-center justify-between">
                             {{-- @if($league->team->count() > 0) --}}
-                            @if($team)
+                            {{-- {{ dd(auth()->user()->team); }} --}}
+                            @if(auth()->user()->team)
+                                <div>
+                                    {{ auth()->user()->team->name }}
+                                    {{ '-' }}
+                                    {{ __('Stadium:') }}
+                                    {{ auth()->user()->team->stadium }} 
+                                </div>
+                                <div class="flex items-center justify-end pr-6">
+                                    
+                                    {{-- <a href="{{ route('team.edit', $team) }}">
+                                        <x-button class="ml-4">
+                                            {{ __('Modify') }}
+                                        </x-button>
 
-                            <div>
-                            {{ $team->name }}
-                            {{ '-' }}
-                            {{ __('Stadium:') }}
-                            {{ $team->stadium }} 
-                            </div>
-                            <div class="flex items-center justify-end pr-6">
-                                
-                                {{-- <a href="{{ route('team.edit', $team) }}">
-                                    <x-button class="ml-4">
-                                        {{ __('Modify') }}
-                                    </x-button>
-
-                                    <x-button class="ml-4 w-8 h-8 flex justify-center bg-orange-500">
-                                        <i title="{{ __('Modify') }}" class="fa-solid fa-pen-to-square"></i>
-                                    </x-button>
-                                </a> --}}
-
-                                <form action="{{ route('team.edit', $team) }}" method="POST">
-                                    @csrf
-                                    @method('GET') 
-                                    <x-button class="ml-4 w-8 h-8 flex justify-center bg-orange-500">
-                                        <i title="{{ __('Modify') }}" class="fa-solid fa-pen-to-square"></i>
-                                    </x-button>
-                                </form>
-                                
-                                {{-- Delete --}}
-                                <form action="{{ route('team.destroy', $team) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE') 
-                                    <x-button class="ml-4 w-8 h-8 flex justify-center bg-red-500">
-                                        <i title="{{ __('Delete') }}" class="fa-solid fa-trash"></i>
-                                    </x-button>
-                                </form>
-                            </div>
+                                        <x-button class="ml-4 w-8 h-8 flex justify-center bg-orange-500">
+                                            <i title="{{ __('Modify') }}" class="fa-solid fa-pen-to-square"></i>
+                                        </x-button>
+                                    </a> --}}
+                                    {{-- {{ dd($team); }} --}}
+                                    <form action="{{ route('team.edit', auth()->user()->team) }}" method="POST">
+                                        @csrf
+                                        @method('GET') 
+                                        <x-button class="ml-4 w-8 h-8 flex justify-center bg-orange-500">
+                                            <i title="{{ __('Modify') }}" class="fa-solid fa-pen-to-square"></i>
+                                        </x-button>
+                                    </form>
+                                    
+                                    {{-- Delete --}}
+                                    <form action="{{ route('team.destroy', auth()->user()->team) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE') 
+                                        <x-button class="ml-4 w-8 h-8 flex justify-center bg-red-500">
+                                            <i title="{{ __('Delete') }}" class="fa-solid fa-trash"></i>
+                                        </x-button>
+                                    </form>
+                                </div>
                         
                             @else
-                            <div>{{ __('Create you team') }}</div>
-                            <x-dropdown-link :href="route('team.create')">
-                                {{ __('Create') }}
-                            </x-dropdown-link>
+                                <div>{{ __('Create you team') }}</div>
+                                <x-dropdown-link :href="route('team.create', [auth()->user()->UserSetting->league])">
+                                    {{ __('Create') }}
+                                </x-dropdown-link>
                             @endif
                         </li>
                     </ul>
