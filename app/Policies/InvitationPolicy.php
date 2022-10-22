@@ -11,7 +11,8 @@ class InvitationPolicy
 {
     use HandlesAuthorization;
 
-    //FIXME - you should use a this method in League policy
+    //BUG - you should use a THE method in League policy - DON'T use this one. 
+    // You don't actually use the invitation directly model in check, what's the point of it? 
     public function userLeagueAdmin(User $user, Invitation $invitation)
     {   
 
@@ -32,13 +33,11 @@ class InvitationPolicy
     public function userOwnedInvitation(User $user, Invitation $invitation)
     {   
 
-        //check if user id on user table, matchs the user_id in the invitations table
-        // $userInvitation = Invitation::where('user_id', $user->id)
-        //                             ->first();
-        
-        // return $userInvitation->id === $invitation->id;
+        //TODO - Switch the check with user_id only after loop update implementation as soon user verify the account (sign-up process)
+        // return $user->id === $invitation->user_id;
 
-        return $user->id === $invitation->user_id;
+        // As consequence of what commented above, for now we safetly check the user email
+        return $user->email === $invitation->email;
         
     }
 }

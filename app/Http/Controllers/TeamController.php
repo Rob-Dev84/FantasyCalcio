@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Team;
 use App\Models\League;
-use App\Models\UserSetting;
 use Illuminate\Http\Request;
 use App\Http\Requests\Team\StoreTeamRequest;
 use App\Http\Requests\Team\UpdateTeamRequest;

@@ -86,6 +86,13 @@ class League extends Model
     //     return $this->hasMany(Invitation::class);
     // }
 
+    // public function sentinvitations() //better to call this method sentInvitation()
+    // {
+    //     return $this->hasManyThrough(Invitation::class, League::class, 'league_id', 'league_id')->withTrashed();
+    // }
+
+   
+
     public function teams()
     {
         return $this->hasMany(Team::class);

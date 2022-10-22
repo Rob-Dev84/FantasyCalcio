@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Invitations\InviteSignedUser;
 use App\Mail\Invitations\InviteUnsignedUser;
+use App\Http\Requests\Invitation\StoreInvitationRequest;
 
 class InvitationController extends Controller
 {
@@ -23,38 +24,14 @@ class InvitationController extends Controller
     public function index()
     {
 
-        //In case the $invitations is NULL we call the initial condition
-        $receivedInvitation = NULL;
-        $league = NULL;
-        $leagueOwnedBy = NULL;
-        $sentInvitations = NULL;
-        
-        //Get all user Invitation received
-        //TODO - Check this query. Probably you can delete it, because we ritched this query using ELOQUENT directly in the index.blade.php file
         $receivedInvitations = Invitation::where('email', auth()->user()->email)->get();
+        // $league = League::where('id', auth()->user()->userSetting->league_id)->first();
+        $sentInvitations = Invitation::where('league_id', auth()->user()->userSetting->league_id)->get();
 
-        if (auth()->user()->userSetting) {
-            $sentInvitations = Invitation::get()->where('league_id', auth()->user()->userSetting->league_id);
-        }
-        
-        
-
-        foreach ($receivedInvitations as $receivedInvitation) {
-            
-            $league = League::find($receivedInvitation->league_id);
-
-        }
-
-        // $leagueOwnedBy = League::where('id', auth()->user()->userSetting->league_id)->first();
-        // $leagueOwnedBy = League::where('id', auth()->user()->userSetting->league_id)->first();
-
-        return view('invitations.index', [
-            'receivedInvitations' => $receivedInvitations,
-            'receivedInvitation' => $receivedInvitation,
-            'sentInvitations' => $sentInvitations,
-            'league' => $league, 
-            // 'leagueOwnedBy' => $leagueOwnedBy, 
-        ]);
+        return view('invitations.index', compact('receivedInvitations', 
+                                                // 'league',
+                                                'sentInvitations',
+                                                ));
     }
 
     /**
@@ -73,52 +50,20 @@ class InvitationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreInvitationRequest $request, League $league)
     {
+        //Check if user is league admin
+        $this->authorize('userLeagueAdmin', $league);
 
-        // TODO - create a custom from Validation | php artisan make:request StoreInvitationRequest
-        
-        // 1. Rule Check Autoinvitation
-        // 2. Rule Check duplicates invitation
-
-        // TODO - Make a custom error for this case when the invitation is in the trash
-
-        //Note: this validation works only if league admin can invite friends to join the league
-
-        $this->validate($request, [
-            'email' => ['required', 'string', 'email', 'max:255',
-                        Rule::unique('users')->where('id', auth()->user()->userSetting->league_id),//if league admin invites themself
-                        Rule::unique('invitations')->where('email', $request->email)
-                                                    ->where('league_id', auth()->user()->userSetting->league_id),//if user has already bein invited
-                        ],
-        ]);
- 
-        
-        $league = League::where('id', auth()->user()->userSetting->league_id)->first();
-        
-
-        //Policy here - because is create from form, I cannot use policy authorize() method
-        abort_if(auth()->user()->id !== $league->user_id, code: 403);
-        
-
-        $invitation = Invitation::where('email', $request->email)
-                                  ->where('league_id', $league->league_id)
-                                  ->first();
-
-        //Check if user is already registered
+        //Check if user is registered or not (we send different email)
         $user = User::where('email', $request->email)->first();
         
-        (!$user) ? $user_id = NULL : $user_id = $user->id;
-
-
-        if (!$invitation) {//create
-            Invitation::create([
-                //for now it doesn't matter if they have confirmed their account
-                'user_id' => $user_id ,
-                'league_id' => $league->id,
-                'email' => $request->email,
-            ]);
-        } 
+        Invitation::create([
+            //for now it doesn't matter if they have confirmed their account
+            'user_id' => ($user) ? $user->id : NULL,
+            'league_id' => $league->id,
+            'email' => $request->email,
+        ]);
 
         //Send email invitation to user who is not registered yet
         if (!$user) {
@@ -133,55 +78,23 @@ class InvitationController extends Controller
         return redirect('invitations');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update()
-    {
-        //
-    }
-
+    
+   
     public function softDelete(Invitation $invitation)
     {
-        //Before deleting check policy delete
+
         $this->authorize('userLeagueAdmin', $invitation);
 
         //SoftDelete
         $invitation->delete();
 
         //Check if user deleted has league_id selected
-        $user_setting_id = UserSetting::where('user_id', $invitation->user_id)
+        $userSettingId = UserSetting::where('user_id', $invitation->user_id)
                                 ->where('league_id', $invitation->league_id)
                                 ->first();
 
-        //unselect league from user deleted. I don't want the user deleted see anything about the league
-        if ($user_setting_id) {
+        //unselect league from user deleted
+        if ($userSettingId) {
 
             UserSetting::first()
                         ->where('user_id', $invitation->user_id)

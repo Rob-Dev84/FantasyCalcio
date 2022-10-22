@@ -13,8 +13,8 @@
     
                     <!-- Validation Errors -->
                     <x-auth-validation-errors class="mb-4" :errors="$errors" />
-    
-                    <form method="POST" action="{{ route('invitation.store') }}">
+  
+                    <form method="POST" action="{{ route('invitation.store', auth()->user()->userSetting->league_id) }}">
                         @csrf
                         <!-- Email Name -->
                         <div>

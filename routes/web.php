@@ -6,12 +6,13 @@ use App\Http\Controllers\League\LeagueController;
 use App\Http\Controllers\Lineup\LineupController;
 use App\Http\Controllers\Market\MarketController;
 use App\Http\Controllers\Roster\RosterController;
-use App\Http\Controllers\InvitationReceivedController;
+// use App\Http\Controllers\InvitationReceivedController;
 use App\Http\Controllers\League\LeagueTrashController;
 use App\Http\Controllers\League\LeagueSelectController;
 use App\Http\Controllers\Lineup\LineupModuleController;
 use App\Http\Controllers\Invitation\InvitationController;
 use App\Http\Controllers\Invitation\InvitationTrashController;
+use App\Http\Controllers\Invitation\InvitationReceivedController;
 
 /*
 |--------------------------------------------------------------------------
@@ -93,7 +94,7 @@ Route::group(['middleware' => 'auth', 'verified'], function() {
         //TODO - Create a middleware that checks if user is league admin of selected league
         Route::get('/invitations/create', 'create')->name('invitations.create');//form to create an invitation
         
-        Route::post('/invitation', 'store')->name('invitation.store');
+        Route::post('/invitation/{league:name}', 'store')->name('invitation.store');
         Route::delete('/invitation/{invitation}', 'softDelete')->name('invitation.softDelete');
     });
 

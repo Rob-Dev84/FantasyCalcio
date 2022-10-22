@@ -63,6 +63,7 @@ class User extends Authenticatable implements MustVerifyEmail
     //     return $this->hasOne(League::class);
     // }
     
+    
     //To display invitation admin trash
     public function leagueOwnedBy()
     {
@@ -72,18 +73,33 @@ class User extends Authenticatable implements MustVerifyEmail
     //relationship to retrieve the user setting (for now the seleceted league)
     public function userSetting()
     {
-        return $this->hasOne(UserSetting::class);
+        return $this->hasOne(UserSetting::class)->with('league');
     }
 
     //invitations() pull out the invitations from the User League Admin
     public function invitations() //better to call this method sentInvitation()
     {
-        return $this->hasManyThrough(Invitation::class,  UserSetting::class, 'league_id', 'league_id')->withTrashed();
+        return $this->hasManyThrough(Invitation::class, UserSetting::class, 'league_id', 'league_id')->withTrashed();
     }
 
-    public function recievedInvitation()//user can recieve one invitation per league
+    // public function sentInvitations() //better to call this method sentInvitation()
+    // {
+    //     return $this->hasManyThrough(Invitation::class, UserSetting::class, 'league_id', 'league_id')->withTrashed()->with('league');
+    // }
+
+    // public function sentInvitations() //better to call this method sentInvitation()
+    // {
+    //     return $this->hasManyThrough(Invitation::class, UserSetting::class, 'league_id', 'league_id')->where('user_settings.league_id', auth()->user()->userSetting->league_id)->withTrashed();
+    // }
+
+    public function recievedInvitation()//FIXME - check it out, for me this compare the usertSetting id with the league:id (no sense)
     {
         return $this->hasOneThrough(Invitation::class, UserSetting::class, 'id', 'league_id');
+    }
+
+    public function newRecievedInvitation()
+    {
+        return $this->hasOne(Invitation::class);
     }
 
     // public function recievedInvitations()//user can recieve one invitation per league
@@ -91,9 +107,9 @@ class User extends Authenticatable implements MustVerifyEmail
     //     return $this->hasOneThrough(Invitation::class, League::class, 'id', 'league_id');
     // }
 
-    public function receivedInvitations()//this pulls out all the invitations from all leagues (on pending)
+    public function receivedInvitations()// All invitations received as guest with league info
     {
-        return $this->hasMany(Invitation::class, 'email', 'email')->withTrashed();
+        return $this->hasMany(Invitation::class, 'email', 'email')->withTrashed()->with('league');
     }
 
     public function leagueReceivedInvitation()//this pulls out all the invitations from all leagues (on pending)

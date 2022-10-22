@@ -46,7 +46,7 @@
                                             <i title="{{ __('Modify') }}" class="fa-solid fa-pen-to-square"></i>
                                         </x-button>
                                     </a> --}}
-                                    {{-- {{ dd($team); }} --}}
+                                  
                                     <form action="{{ route('team.edit', auth()->user()->team) }}" method="POST">
                                         @csrf
                                         @method('GET') 
@@ -55,14 +55,17 @@
                                         </x-button>
                                     </form>
                                     
-                                    {{-- Delete --}}
-                                    <form action="{{ route('team.destroy', auth()->user()->team) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE') 
-                                        <x-button class="ml-4 w-8 h-8 flex justify-center bg-red-500">
-                                            <i title="{{ __('Delete') }}" class="fa-solid fa-trash"></i>
-                                        </x-button>
-                                    </form>
+                                    {{-- Delete - for only if team hasn't deployed module --}}
+                                    @if (!auth()->user()->team->module)
+                                        <form action="{{ route('team.destroy', auth()->user()->team) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE') 
+                                            <x-button class="ml-4 w-8 h-8 flex justify-center bg-red-500">
+                                                <i title="{{ __('Delete') }}" class="fa-solid fa-trash"></i>
+                                            </x-button>
+                                        </form>
+                                    @endif
+                                    
                                 </div>
                         
                             @else

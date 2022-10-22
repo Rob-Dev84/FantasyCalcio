@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\League;
+use App\Models\UserSetting;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Invitation extends Model
 {
@@ -20,6 +22,16 @@ class Invitation extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'email');
+    }
+
+    public function league()
+    {
+        return $this->belongsTo(League::class);
+    }
+
+    public function userSetting()
+    {
+        return $this->belongsTo(UserSetting::class, 'league_id');
     }
 
 
