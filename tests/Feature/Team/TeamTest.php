@@ -19,19 +19,19 @@ class TeamTest extends TestCase
     public function test_should_disply_user_team_page()
     {
         // //Get the helper error hendler (don't use if you have some validation to test)
-        // $this->withoutExceptionHandling();
+        $this->withoutExceptionHandling();
 
         // $leagueType = LeagueType::factory()->create();
         // $marketType = MarketType::factory()->create();
         // $scoreType = ScoreType::factory()->create();
         
         // // create user (UserFactory.php file)
-        // $user = User::factory()->create();
+        $user = User::factory()->create();
 
         // //USer need to be authanticate
-        // $this->actingAs($user);
+        $this->actingAs($user);
 
-        // $league = League::factory()->create();
+        $league = League::factory()->create();
 
         // // Assert status 200
         // $this

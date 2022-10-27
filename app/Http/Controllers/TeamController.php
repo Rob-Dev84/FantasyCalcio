@@ -78,7 +78,6 @@ class TeamController extends Controller
 
     public function update(UpdateTeamRequest $request, Team $team)
     {
-        $this->authorize('update', $team);
 
         $request->user()->team()->first()->update($request->only('name', 'stadium'));
 

@@ -15,7 +15,8 @@ class UpdateTeamRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        // return true;
+        return auth()->user()->id === $this->team->user_id;
     }
 
     /**
@@ -25,9 +26,11 @@ class UpdateTeamRequest extends FormRequest
      */
     public function rules()
     {
+    
         return [
             'name' => ['required', //Ignore unique team name when user update name and Keep Unique team name per league 
-                        Rule::unique('teams', 'name')->ignore($this->team->user_id)
+                        Rule::unique('teams', 'name')->ignore($this->team->id)
+                                             ->where('user_id', $this->team->user_id)
                                              ->where('league_id', $this->team->league_id),    
                         'min:3|max:25'
                     ],
