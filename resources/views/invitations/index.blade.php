@@ -136,7 +136,7 @@
             </div>
         </div>
     </div>
-    {{-- {{ dd(auth()->user()->receivedInvitations) }} --}}
+    {{-- {{ dd($receivedInvitations) }} --}}
     @if(auth()->user()->receivedInvitations)
         @foreach (auth()->user()->receivedInvitations as $receivedInvitation)
         <div class="py-2">

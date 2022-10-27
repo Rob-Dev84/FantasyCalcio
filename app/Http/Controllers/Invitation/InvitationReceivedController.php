@@ -13,42 +13,27 @@ use App\Http\Controllers\Controller;
 
 class InvitationReceivedController extends Controller
 {
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     
     public function accept(Request $request, Invitation $invitation)
     {
-        // dd($request->user()->userSetting());
-        //Before accept check policy
 
         //We need to check the emails here, because League admin can invite user who are not signed up yet
         $this->authorize('userOwnedInvitation', $invitation);
+        
+        if ($invitation->confirmed === NULL) {
+    
+            return response()->json(['error' => 'Munnezz'], status:442);
+            die();
+        }
 
-        dd($request);
-
+        
+        
         // $request->user()->receivedInvitations()->first()->update($request->only('name', 'stadium'));
 
-        $response = $request->user()->receivedInvitations()->first()->update(['confirmed' => true]);
+        $accepInvitation = $request->user()->receivedInvitations()->where('id', $invitation->id)->update(['confirmed' => true]);
 
-        dd($response);
-
-        $accepInvitation = Invitation::where('user_id', auth()->user()->id)
-                                    ->where('id', $invitation->id)
-                                    ->first()
-                                    ->update([
-            'confirmed' => true,
-            ]);
-
-        //Using relationship on user model
-
-        // $test = $request->user()->recievedInvitation()->where('id', $invitation->id)->update([
-        //     'confirmed' => true,
-        // ]);
+        // TODO - We cound add new row on leagues table as well. 
+        // However, we need to implement a column which indicate who is the admin and not (a boolean) 
 
         $league_id_selected = UserSetting::where('user_id', auth()->user()->id)->first();
 
@@ -70,10 +55,7 @@ class InvitationReceivedController extends Controller
 
         // }
 
-        //Send email to the League Admin
-
-        
-
+        //Send email to the League Admin about new user joint the League
         if ($accepInvitation) {
 
             //find user league admin table
@@ -93,12 +75,16 @@ class InvitationReceivedController extends Controller
         //Before reject check policy
         $this->authorize('userOwnedInvitation', $invitation);
 
-        Invitation::where('user_id', auth()->user()->id)
-                                ->where('id', $invitation->id)
-                                ->first()
-                                ->update([
-            'confirmed' => false,
-            ]);
+        $declineInvitation = $request->user()->receivedInvitations()
+                            ->where('id', $invitation->id)
+                            ->update(['confirmed' => false]);
+
+        // Invitation::where('user_id', auth()->user()->id)
+        //                         ->where('id', $invitation->id)
+        //                         ->first()
+        //                         ->update([
+        //     'confirmed' => false,
+        //     ]);
 
         return back();
     }

@@ -24,7 +24,7 @@ class InvitationController extends Controller
     public function index()
     {
 
-        $receivedInvitations = Invitation::where('email', auth()->user()->email)->get();
+        $receivedInvitations = Invitation::where('email', auth()->user()->email)->with('league')->get();
         // $league = League::where('id', auth()->user()->userSetting->league_id)->first();
         $sentInvitations = Invitation::where('league_id', auth()->user()->userSetting->league_id)->get();
 
@@ -54,6 +54,10 @@ class InvitationController extends Controller
     {
         //Check if user is league admin
         $this->authorize('userLeagueAdmin', $league);
+
+
+    // FIXME - we can create a service provider and place the folling code into the register function.
+    // Because we have to send an email, we can use the boot() function
 
         //Check if user is registered or not (we send different email)
         $user = User::where('email', $request->email)->first();
