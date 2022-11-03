@@ -14,7 +14,8 @@ class StoreInvitationRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        // return true;
+        return auth()->user()->id === $this->league->user_id;
     }
 
     /**

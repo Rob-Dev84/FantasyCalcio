@@ -14,6 +14,7 @@ use App\Http\Controllers\Invitation\InvitationController;
 use App\Http\Controllers\Invitation\InvitationTrashController;
 use App\Http\Controllers\Invitation\InvitationReceivedController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,20 +31,22 @@ use App\Http\Controllers\Invitation\InvitationReceivedController;
 
 
 Route::get('/', function () {
+    
     return view('welcome');
 });
 
+
+
+
 //Group all routes in this application with middleware
 
-//TODO - make route for not verified users
-
-Route::group(['middleware' => 'auth', 'verified'], function() {
-
+//FIXME - middleware don't seems to work in here, but it works om each controller
+Route::middleware(['auth', 'verified'])->group(function () {
+    // Route::middleware(['auth', 'verified'])->group(['middleware' => ['auth', 'verified']], function () {
+        
     Route::get('/dashboard', function () {//This will go to the controller
         return view('dashboard/dashboard');
     })->name('dashboard');
-
-
     
 
     // Route::get('/league', function () {//This will go to the controller

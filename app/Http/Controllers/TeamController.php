@@ -10,6 +10,13 @@ use App\Http\Requests\Team\UpdateTeamRequest;
 
 class TeamController extends Controller
 {
+
+    public function __construct()
+    {
+        //MIddleware works here but not in web.php file
+        $this->middleware(['auth', 'verified']);
+    }
+
     /**
      * Display a listing of the resource.
      *

@@ -52,9 +52,11 @@ class InvitationController extends Controller
      */
     public function store(StoreInvitationRequest $request, League $league)
     {
+        // Moved to StoreInvitationRequest
         //Check if user is league admin
-        $this->authorize('userLeagueAdmin', $league);
+        // $this->authorize('userLeagueAdmin', $league);
 
+        // dd($league);
 
     // FIXME - we can create a service provider and place the folling code into the register function.
     // Because we have to send an email, we can use the boot() function
@@ -69,7 +71,8 @@ class InvitationController extends Controller
             'email' => $request->email,
         ]);
 
-        //Send email invitation to user who is not registered yet
+        //To send email, use Job. 
+        // Check if user who is not registered yet
         if (!$user) {
             Mail::to($request->email)->send(new InviteUnsignedUser());
         }

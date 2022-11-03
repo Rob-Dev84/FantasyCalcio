@@ -22,7 +22,7 @@ class LeagueController extends Controller
     public function __construct()
     {
         //So I want to apply the session restriction only to the store() and destroy() methods
-        $this->middleware(['auth'])->only(['store', 'destroy']);
+        $this->middleware(['auth', 'verified'])->only(['store', 'destroy']);
     }
 
 

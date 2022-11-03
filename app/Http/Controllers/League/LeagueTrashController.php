@@ -8,6 +8,14 @@ use App\Http\Controllers\Controller;
 
 class LeagueTrashController extends Controller
 {
+
+    public function __construct()
+    {
+        //MIddleware works here but not in web.php file
+        $this->middleware(['auth', 'verified']);
+    }
+
+    
     /**
      * Display a listing of the resource.
      *

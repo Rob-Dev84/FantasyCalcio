@@ -12,7 +12,7 @@ class LeagueSelectController extends Controller
     public function __construct()
     {
         //add restrictions - only update is avaible
-        $this->middleware(['auth'])->only(['update']);
+        $this->middleware(['auth', 'verified'])->only(['update']);
     }
 
     
